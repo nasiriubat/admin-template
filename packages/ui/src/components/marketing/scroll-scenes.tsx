@@ -16,7 +16,9 @@ async function loadGsap() {
   return { gsap, ScrollTrigger };
 }
 
+/** Set NEXT_PUBLIC_SCROLL_ANIMATION=off to disable GSAP entirely (then `gsap` can be removed from package.json). */
 const canAnimate = () =>
+  process.env.NEXT_PUBLIC_SCROLL_ANIMATION !== 'off' &&
   typeof window !== 'undefined' &&
   !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
   window.matchMedia('(min-width: 1024px)').matches;
@@ -57,7 +59,7 @@ export function StickyShowcase({ id, eyebrow, title, description, steps }: { id?
       <div ref={root} className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <ol className="space-y-6 lg:space-y-[26vh] lg:pb-[20vh]">
           {steps.map((s, i) => (
-            <li key={s.title} data-step className={cn('rounded-card border bg-surface p-6 shadow-card transition-opacity duration-300 lg:min-h-48', i === active ? 'border-primary lg:opacity-100' : 'border-border lg:opacity-60')}>
+            <li key={s.title} data-step className={cn('rounded-card border bg-surface p-6 shadow-card transition-shadow duration-300 lg:min-h-48', i === active ? 'border-primary shadow-popover' : 'border-border')}>
               <span className="mb-4 grid size-10 place-items-center rounded-xl bg-primary/10 text-primary">
                 <IconRenderer name={s.icon} className="size-5" />
               </span>

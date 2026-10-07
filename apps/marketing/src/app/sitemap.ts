@@ -1,7 +1,10 @@
 import type { MetadataRoute } from 'next';
-
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3200';
+import { docPages } from '../content/docs';
+import { posts } from '../content/posts';
+import { siteUrl } from '../lib/seo';
+import { staticRoutes } from '../lib/nav';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ['', '/ai', '/enterprise'].map((path) => ({ url: `${base}${path}`, changeFrequency: 'monthly', priority: path === '' ? 1 : 0.7 }));
+  const paths = [...staticRoutes, ...docPages.map((d) => `/docs/${d.slug}`), ...posts.map((p) => `/blog/${p.slug}`)];
+  return paths.map((path) => ({ url: `${siteUrl}${path}`, changeFrequency: path.startsWith('/blog') || path === '/changelog' ? 'weekly' : 'monthly', priority: path === '' ? 1 : 0.7 }));
 }

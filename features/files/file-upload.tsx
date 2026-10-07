@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useId, useRef, useState, type DragEvent } from 'react';
-import { Button, cn, formatBytes, IconRenderer, toast } from '@nexus/ui';
+import { Button, cn, formatBytes, IconRenderer, Progress, toast } from '@nexus/ui';
 import { useUploadFile } from './hooks';
 import { ACCEPT_ATTRIBUTE, MAX_FILE_SIZE, validateFile } from './schemas';
 
@@ -124,9 +124,7 @@ export function FileUploader({ disabled }: { disabled?: boolean }) {
                   <p role="alert" className="text-xs font-medium text-danger">{item.error}</p>
                 ) : (
                   <div className="mt-1.5 flex items-center gap-2">
-                    <div role="progressbar" aria-label={`Uploading ${item.name}`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={item.progress} className="h-1.5 flex-1 overflow-hidden rounded-full bg-canvas">
-                      <div className="h-full rounded-full bg-primary transition-[width] duration-150 motion-reduce:transition-none" style={{ width: `${item.progress}%` }} />
-                    </div>
+                    <Progress className="flex-1" value={item.progress} label={`Uploading ${item.name}`} />
                     <span className="w-9 text-right text-xs tabular-nums text-text-muted">{item.progress}%</span>
                   </div>
                 )}

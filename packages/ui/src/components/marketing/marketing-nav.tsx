@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { cn } from '../../lib/utils';
 import { IconRenderer } from '../icons/icon-renderer';
@@ -15,6 +16,7 @@ export interface MarketingLink {
 
 export function MarketingNav({ brand, links, cta, secondaryCta }: { brand: string; links: MarketingLink[]; cta: MarketingLink; secondaryCta?: MarketingLink }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-canvas/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
@@ -23,9 +25,9 @@ export function MarketingNav({ brand, links, cta, secondaryCta }: { brand: strin
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="rounded-lg px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-text">
+            <Link key={l.href} href={l.href} aria-current={pathname === l.href ? 'page' : undefined} className={cn('rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface hover:text-text', pathname === l.href ? 'text-text' : 'text-text-muted')}>
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
@@ -50,9 +52,9 @@ export function MarketingNav({ brand, links, cta, secondaryCta }: { brand: strin
             <SheetBody className="space-y-1 py-2">
               {links.map((l) => (
                 <SheetClose asChild key={l.href}>
-                  <a href={l.href} className="flex min-h-11 items-center rounded-lg px-3 text-base font-medium hover:bg-canvas">
+                  <Link href={l.href} aria-current={pathname === l.href ? 'page' : undefined} className="flex min-h-11 items-center rounded-lg px-3 text-base font-medium hover:bg-canvas">
                     {l.label}
-                  </a>
+                  </Link>
                 </SheetClose>
               ))}
               <Button asChild className="mt-4 w-full" size="lg">

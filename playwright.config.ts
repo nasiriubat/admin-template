@@ -11,10 +11,18 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
-  webServer: {
-    command: 'NEXT_PUBLIC_DEMO_MODE=true pnpm --filter @nexus/admin build && pnpm --filter @nexus/admin start',
-    url: 'http://localhost:3000/login',
-    reuseExistingServer: !process.env.CI,
-    timeout: 240_000,
-  },
+  webServer: [
+    {
+      command: 'NEXT_PUBLIC_DEMO_MODE=true pnpm --filter @nexus/admin build && pnpm --filter @nexus/admin start',
+      url: 'http://localhost:3000/login',
+      reuseExistingServer: !process.env.CI,
+      timeout: 240_000,
+    },
+    {
+      command: 'pnpm --filter @nexus/marketing build && pnpm --filter @nexus/marketing start',
+      url: 'http://localhost:3200/',
+      reuseExistingServer: !process.env.CI,
+      timeout: 240_000,
+    },
+  ],
 });

@@ -106,6 +106,37 @@
 - TimelineChart
 - StatusMatrix
 
+## Implemented
+
+Status of the shared components in `packages/ui/src/components`. "Planned" means listed above but not built yet. Naming differences from the lists above are noted.
+
+| Component | Status | Notes |
+| --- | --- | --- |
+| AppShell, Sidebar, TopBar, Breadcrumbs, MobileBottomNav, MobileNavSheet, CommandPalette | Implemented | `shell/` |
+| PageHeader, PageContainer, Section, StickyActionBar | Implemented | `patterns/`, `forms/` |
+| Tabs, SegmentedControl, Pagination | Implemented | `ui/` |
+| Stepper | Implemented | `ui/stepper.tsx`, `aria-current="step"` |
+| Toast, Alert, Skeleton, Spinner, EmptyState, ErrorState, UnauthorizedState | Implemented | |
+| Banner | Implemented | Dismissible page banner |
+| Progress | Implemented | Determinate, `role="progressbar"` |
+| Button, IconButton, Checkbox, Switch (Toggle), Select (native), SearchInput, Input, Textarea | Implemented | |
+| Combobox, MultiSelect | Implemented | cmdk + Radix Popover, tags, clear button |
+| DatePicker, DateRangeInput | Implemented | Native date input wrappers (lite); validates from <= to |
+| TagInput, Kbd | Implemented | |
+| Radio, Slider, TimePicker, FileUpload, ColorPicker | Planned | |
+| Card, MetricCard, ChartCard, Dialog, ConfirmDialog, Sheet (Drawer), Tooltip, DropdownMenu | Implemented | |
+| ActionCard, StatusCard, ProfileCard, MediaCard, InteractiveCard, Popover (standalone) | Planned | |
+| DataTable, FilterBar | Implemented | `data/` |
+| DescriptionList | Implemented | `<dl>` grid |
+| ActivityTimeline (alias ActivityFeed) | Implemented | `<ol>` with `<time>`; named `ActivityTimeline` because the marketing `Timeline` already exists |
+| Badge, Avatar | Implemented | |
+| CodeViewer, JsonViewer | Implemented | Copy button; collapsible keyboard-accessible tree |
+| MarkdownViewer, DataList, Stat, Tag (display) | Planned | |
+| TimeSeriesChart (line/area/bar), DonutChart, Sparkline | Implemented | `charts/` |
+| RadialProgress, Funnel, Heatmap, DistributionChart, TimelineChart, StatusMatrix | Planned | |
+
+Live examples of every implemented component: `/examples/components` (see `docs/EXAMPLES.md`).
+
 ## Page patterns
 
 ### Dashboard page

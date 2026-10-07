@@ -20,3 +20,4 @@ import '../account/mock';
 import '../knowledge/mock';
 import '../billing/mock';
 import '../ai/mock';
+import '../examples/mock';

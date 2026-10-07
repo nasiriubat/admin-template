@@ -13,7 +13,7 @@ export function LogoCloud({ title, logos }: { title: string; logos: string[] }) 
       <p className="mb-6 text-center text-sm font-medium text-text-muted">{title}</p>
       <ul className="grid grid-cols-2 items-center gap-6 sm:grid-cols-3 md:grid-cols-6">
         {logos.map((name) => (
-          <li key={name} className="text-center text-lg font-semibold tracking-tight text-text-muted/80">
+          <li key={name} className="text-center text-lg font-semibold tracking-tight text-text-muted">
             {name}
           </li>
         ))}

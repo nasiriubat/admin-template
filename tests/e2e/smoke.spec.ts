@@ -4,7 +4,8 @@ import { expect, test } from '@playwright/test';
 const ROUTES = [
   '/', '/analytics', '/users', '/users/u-001', '/roles', '/audit', '/health', '/logs', '/jobs', '/files',
   '/feature-flags', '/api-keys', '/webhooks', '/settings', '/theme-editor', '/notifications', '/profile',
-  '/ai/providers', '/ai/models', '/ai/prompts', '/ai/usage', '/knowledge/documents', '/knowledge/sources',
+  '/ai/providers', '/ai/models', '/ai/prompts', '/ai/usage', '/knowledge/documents', '/knowledge/sources', '/billing',
+  '/examples/components', '/examples/wizard', '/examples/detail', '/examples/crud', '/examples/settings-layout',
 ];
 
 test.beforeEach(async ({ page, context }) => {
@@ -25,13 +26,14 @@ for (const mode of ['light', 'dark'] as const) {
       await page.goto(route);
       await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible();
       // Let queries settle: no skeleton/busy regions left.
-      await expect(page.locator('main [aria-busy="true"]')).toHaveCount(0, { timeout: 10_000 });
+      // The component gallery intentionally shows loading skeletons.
+      if (route !== '/examples/components') await expect(page.locator('main [aria-busy="true"]')).toHaveCount(0, { timeout: 10_000 });
 
       // No horizontal page scroll (mobile quality checklist).
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, 'horizontal overflow').toBeLessThanOrEqual(1);
 
-      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
       const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
       expect(serious.map((v) => `${v.id}: ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`)).toEqual([]);
       expect(problems).toEqual([]);

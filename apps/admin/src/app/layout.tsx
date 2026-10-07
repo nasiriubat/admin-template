@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
   robots: { index: false, follow: false },
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Nexus Admin' },
-  icons: { icon: '/icons/icon.svg', apple: '/icons/icon-192.png' },
+  icons: { icon: '/icons/icon.svg', apple: '/icons/apple-touch-icon.png' },
 };
 
 export const viewport: Viewport = {

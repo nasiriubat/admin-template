@@ -63,7 +63,7 @@ Sign in at `/login` with the demo accounts (demo mode only):
 | `editor@example.com` | read access plus files |
 | `viewer@example.com` | dashboard, analytics, health |
 
-Billing is an optional module (off by default): set `modules.billing: true` in `apps/admin/src/lib/app-config.ts`.
+Billing is an optional module: set `modules.billing: false` in `apps/admin/src/lib/app-config.ts` if your product does not charge customers.
 
 Any password of 8+ characters works in demo mode. **Demo mode uses an in-memory API and a non-secret marker cookie. It is not a security control. Set `NEXT_PUBLIC_API_BASE_URL` (or `NEXT_PUBLIC_DEMO_MODE=false`) for real deployments.**
 
@@ -92,6 +92,14 @@ packages/motion    Shared animation variants
 features/*         One folder per module: manifest, types, schemas, mock API, service, hooks, pages
 ```
 
+## What is in the box
+
+- **Admin app**: 19 modules (dashboard, analytics, users, roles & permissions, audit, health, logs, jobs, files, feature flags, API keys, webhooks, AI, knowledge base, billing, settings, theme editor, notifications, profile), auth pages, 5 theme presets, PWA.
+- **Examples** (`/examples/*`, removable): component gallery, multi-step wizard, detail page, CRUD scaffold, settings layout. See [docs/EXAMPLES.md](docs/EXAMPLES.md).
+- **Marketing site**: SaaS, AI and Enterprise landing templates plus pricing, features, about, customers, contact, changelog, blog, docs and legal templates.
+- **Email templates**: invite, password reset, invoice, security alert in `templates/emails`.
+- **Tooling**: CI, Dockerfile, Playwright + axe accessibility tests, `pnpm icons` (brand assets from `branding/logo.svg`), `pnpm screenshots`, `pnpm package:release`.
+
 ## Reusing it in a new project
 
 1. Edit `apps/admin/src/lib/app-config.ts`: product name, default preset, enabled modules.
@@ -115,3 +123,9 @@ Read these files in order:
 ## Important
 
 Do not add a permissive open source license until you decide whether this release is intended to be free and open source or commercial. See `docs/LICENSE_STRATEGY.md`.
+
+## Screenshots
+
+![Dashboard](docs/screenshots/dashboard-desktop-light.png)
+![Dashboard dark](docs/screenshots/dashboard-desktop-dark.png)
+![Mobile](docs/screenshots/users-mobile-light.png)

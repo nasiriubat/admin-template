@@ -23,7 +23,7 @@ export default function EnterprisePage() {
       <StatsBand stats={enterprise.stats} />
       <FeatureGrid id="platform" eyebrow="Platform" title="Built for rigour and review" features={enterprise.features} />
       <SectionShell id="compare" title="Why teams move off spreadsheets and scripts">
-        <div className="overflow-x-auto rounded-card border border-border bg-surface">
+        <div role="region" aria-label="Comparison table (scrollable)" tabIndex={0} className="overflow-x-auto rounded-card border border-border bg-surface">
           <table className="w-full min-w-[32rem] text-sm">
             <caption className="sr-only">Comparison of spreadsheets and scripts with Nexus Research</caption>
             <thead>

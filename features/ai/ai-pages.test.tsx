@@ -58,12 +58,12 @@ describe('AiProvidersPage', () => {
 });
 
 describe('AiModelsPage', () => {
-  it('shows pricing and capabilities with default radios', async () => {
+  it('shows pricing and capabilities with default toggles', async () => {
     wrap(<AiModelsPage />);
     await waitFor(() => expect(screen.getAllByText('Claude Sonnet').length).toBeGreaterThan(0), T);
     expect(screen.getAllByText('vision').length).toBeGreaterThan(0);
-    const radio = screen.getAllByLabelText('Use GPT-4o as default chat model')[0] as HTMLInputElement;
-    expect(radio.checked).toBe(true);
+    const button = screen.getAllByLabelText('Use GPT-4o as default chat model')[0];
+    expect(button).toHaveAttribute('aria-pressed', 'true');
   });
 });
 

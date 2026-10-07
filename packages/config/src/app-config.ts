@@ -23,6 +23,7 @@ export interface AppConfig {
     knowledge: boolean;
     billing: boolean;
     settings: boolean;
+    examples: boolean;
   };
   theme: {
     preset: string;
@@ -59,9 +60,11 @@ export const defaultAppConfig: AppConfig = {
     analytics: true,
     ai: true,
     knowledge: true,
-    // Optional: enable for products that bill customers.
-    billing: false,
+    // Optional: turn off for products that do not bill customers.
+    billing: true,
     settings: true,
+    // Removable demo pages: set false or delete features/examples before shipping
+    examples: true,
   },
   theme: {
     preset: 'modern-saas',

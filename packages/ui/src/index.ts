@@ -32,6 +32,17 @@ export * from './components/ui/skeleton';
 export * from './components/ui/spinner';
 export * from './components/ui/segmented-control';
 export * from './components/ui/pagination';
+export * from './components/ui/stepper';
+export * from './components/ui/timeline';
+export * from './components/ui/description-list';
+export * from './components/ui/code-viewer';
+export * from './components/ui/json-viewer';
+export * from './components/ui/combobox';
+export * from './components/ui/date-input';
+export * from './components/ui/progress';
+export * from './components/ui/kbd';
+export * from './components/ui/banner';
+export * from './components/ui/tag-input';
 
 // Patterns
 export * from './components/patterns/empty-state';

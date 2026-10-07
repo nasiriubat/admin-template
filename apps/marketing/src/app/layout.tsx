@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: 'Nexus', template: '%s · Nexus' },
   description: 'Ship a polished admin and a landing page from one design system.',
-  icons: { icon: '/icons/icon.svg', apple: '/icons/icon-192.png' },
+  icons: { icon: '/icons/icon.svg', apple: '/icons/apple-touch-icon.png' },
   openGraph: { type: 'website', siteName: 'Nexus' },
 };
 

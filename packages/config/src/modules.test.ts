@@ -44,9 +44,10 @@ describe('hasPermission', () => {
 
 describe('buildNavigation', () => {
   it('hides disabled modules and entries the user lacks permission for', () => {
-    const groups = buildNavigation({ modules, enabled: defaultAppConfig.modules, permissions: ['users.view'] });
-    expect(groups.flatMap((g) => g.items.map((i) => i.id))).toEqual(['home', 'users']); // billing is disabled by default
-    const none = buildNavigation({ modules, enabled: defaultAppConfig.modules, permissions: [] });
+    const off = { ...defaultAppConfig.modules, billing: false };
+    const groups = buildNavigation({ modules, enabled: off, permissions: ['users.view'] });
+    expect(groups.flatMap((g) => g.items.map((i) => i.id))).toEqual(['home', 'users']);
+    const none = buildNavigation({ modules, enabled: off, permissions: [] });
     expect(none.flatMap((g) => g.items.map((i) => i.id))).toEqual(['home']);
   });
   it('enables optional modules from config and keeps group order', () => {

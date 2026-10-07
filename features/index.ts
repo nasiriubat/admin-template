@@ -18,6 +18,7 @@ import { accountModule } from './account/module';
 import { aiModule } from './ai/module';
 import { billingModule } from './billing/module';
 import { knowledgeModule } from './knowledge/module';
+import { examplesModule } from './examples/module';
 
 /** Every module shipped with Nexus Admin. Projects enable/disable optional ones via AppConfig.modules. */
 export const allModules: ModuleDefinition[] = [
@@ -40,6 +41,8 @@ export const allModules: ModuleDefinition[] = [
   aiModule,
   knowledgeModule,
   billingModule,
+  // Removable demo pages (docs/EXAMPLES.md). Delete this line and features/examples before shipping.
+  examplesModule,
 ];
 
 /** Flat catalogue of every permission declared by the shipped modules (used by the Roles editor). */

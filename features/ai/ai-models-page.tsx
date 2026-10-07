@@ -1,7 +1,7 @@
 'use client';
 
 import { createColumnHelper } from '@tanstack/react-table';
-import { useId, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCan } from '@nexus/auth';
 import {
   Badge,
@@ -26,9 +26,13 @@ import { ModelPricingDialog } from './model-pricing-dialog';
 import { TASK_TYPES, type AiModel, type TaskType } from './types';
 
 const col = createColumnHelper<AiModel>();
-/** Own radio name per instance: the table and its mobile cards both render this cell and must not share a group. */
-function DefaultRadio({ label, ...props }: { label: string; checked: boolean; disabled: boolean; onChange: () => void }) {
-  return <input type="radio" name={useId()} className="size-5 accent-primary [@media(pointer:coarse)]:size-6" aria-label={label} {...props} />;
+/** Toggle button (not a radio): the table and its mobile cards both render this cell, and a button needs no shared group. */
+function DefaultButton({ label, checked, disabled, onChange }: { label: string; checked: boolean; disabled: boolean; onChange: () => void }) {
+  return (
+    <Button size="sm" variant={checked ? 'primary' : 'secondary'} aria-pressed={checked} aria-label={label} disabled={disabled || checked} onClick={onChange}>
+      {checked ? 'Default' : 'Set default'}
+    </Button>
+  );
 }
 const price = (v: number) => (v === 0 ? 'Free' : formatUsd(v));
 
@@ -62,7 +66,7 @@ export function AiModelsPage() {
           const m = row.original;
           if (!m.capabilities.includes(task)) return <span className="text-text-muted" aria-label="Not applicable">-</span>;
           return (
-            <DefaultRadio
+            <DefaultButton
               label={`Use ${m.displayName} as default ${task} model`}
               checked={m.defaultFor.includes(task)}
               disabled={!canManage || !m.enabled}
