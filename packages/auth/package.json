@@ -14,7 +14,7 @@
     "@nexus/config": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
+    "typescript": "^6.0.3",
     "@types/react": "^19.0.8",
     "react": "^19.0.0"
   },
