@@ -26,6 +26,7 @@ import { ANALYTICS_RANGES, type AnalyticsRange, type TopPage } from './types';
 const RANGE_OPTIONS = ANALYTICS_RANGES.map((value) => ({ value, label: value === '7d' ? '7 days' : value === '30d' ? '30 days' : '90 days' }));
 const RANGE_LABEL: Record<AnalyticsRange, string> = { '7d': 'last 7 days', '30d': 'last 30 days', '90d': 'last 90 days' };
 const col = createColumnHelper<TopPage>();
+const NO_ROWS: TopPage[] = [];
 
 export function AnalyticsPage() {
   const [range, setRange] = useState<AnalyticsRange>('30d');
@@ -107,7 +108,7 @@ export function AnalyticsPage() {
             <DataTable<TopPage>
               caption="Top pages"
               columns={columns}
-              data={data?.topPages ?? []}
+              data={data?.topPages ?? NO_ROWS}
               getRowId={(p) => p.path}
               getRowLabel={(p) => p.path}
               mode="client"

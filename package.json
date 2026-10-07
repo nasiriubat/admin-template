@@ -4,7 +4,7 @@
   "private": true,
   "description": "Nexus Admin - Reusable product grade admin dashboard and marketing UI framework",
   "scripts": {
-    "dev": "pnpm --filter @nexus/admin dev",
+    "dev": "node scripts/dev.mjs",
     "dev:marketing": "pnpm --filter @nexus/marketing dev",
     "build": "pnpm -r --if-present build",
     "build:admin": "pnpm --filter @nexus/admin build",
@@ -19,7 +19,8 @@
     "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
     "icons": "node scripts/generate-icons.mjs",
     "screenshots": "node scripts/screenshots.mjs",
-    "package:release": "node scripts/package-release.mjs"
+    "package:release": "node scripts/package-release.mjs",
+    "dev:admin": "pnpm --filter @nexus/admin dev"
   },
   "packageManager": "pnpm@12.3.4",
   "devDependencies": {

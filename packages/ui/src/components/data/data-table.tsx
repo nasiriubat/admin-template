@@ -158,6 +158,9 @@ export function DataTable<T>({
     manualPagination: server,
     manualFiltering: server,
     pageCount: server ? Math.max(1, Math.ceil((total ?? data.length) / query.pageSize)) : undefined,
+    // Page and expansion are driven by `query`; TanStack's auto-reset would fight that controlled state.
+    autoResetPageIndex: false,
+    autoResetExpanded: false,
     enableRowSelection: Boolean(selectable),
     enableMultiSort: false,
     onRowSelectionChange: setRowSelection,
@@ -208,7 +211,7 @@ export function DataTable<T>({
   const showEmpty = !isLoading && !error && rows.length === 0;
 
   return (
-    <div className={cn('rounded-card border border-border bg-surface shadow-card', className)} aria-busy={isLoading || isFetching || undefined}>
+    <div className={cn('rounded-card border border-border bg-surface', className)} aria-busy={isLoading || isFetching || undefined}>
       {/* Toolbar */}
       <div className="space-y-3 border-b border-border p-3 md:p-4">
         <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center">

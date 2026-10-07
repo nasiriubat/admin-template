@@ -31,13 +31,15 @@ export interface TopBarProps {
   onInstallApp?: () => void;
   profileHref?: string;
   settingsHref?: string;
+  /** Links to other apps (e.g. the marketing site). Open in a new tab from the account menu. */
+  externalLinks?: Array<{ label: string; href: string }>;
   className?: string;
 }
 
 const iconButton =
   'grid size-10 place-items-center rounded-xl text-text-muted hover:bg-canvas hover:text-text data-[state=open]:bg-canvas data-[state=open]:text-primary [@media(pointer:coarse)]:size-11';
 
-export function TopBar({ appName, user, onOpenSearch, onSignOut, notifications, statusChip, onInstallApp, profileHref = '/profile', settingsHref = '/settings', className }: TopBarProps) {
+export function TopBar({ appName, user, onOpenSearch, onSignOut, notifications, statusChip, onInstallApp, profileHref = '/profile', settingsHref = '/settings', externalLinks, className }: TopBarProps) {
   const { resolvedMode, toggleMode } = useTheme();
 
   return (
@@ -138,6 +140,14 @@ export function TopBar({ appName, user, onOpenSearch, onSignOut, notifications, 
                 <IconRenderer name="Settings" className="size-4" /> Settings
               </Link>
             </DropdownMenuItem>
+            {externalLinks?.map((link) => (
+              <DropdownMenuItem key={link.href} asChild>
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  <IconRenderer name="ExternalLink" className="size-4" /> {link.label}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </DropdownMenuItem>
+            ))}
             {onInstallApp && (
               <DropdownMenuItem onSelect={onInstallApp}>
                 <IconRenderer name="Download" className="size-4" /> Install app

@@ -4,13 +4,16 @@ import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, type ReactNode } from 'react';
 import { useAuth } from '@nexus/auth';
-import { isModuleEnabled, matchRoute } from '@nexus/config';
+import { getRuntimeConfig, isModuleEnabled, matchRoute } from '@nexus/config';
 import { allModules } from '@nexus/features';
 import { isDemoMode, UNAUTHORIZED_EVENT } from '@nexus/features/_shared';
 import { NotificationsMenu } from '@nexus/features/notifications';
 import { AppShell, Badge, Skeleton, UnauthorizedState } from '@nexus/ui';
 import { appConfig } from '../lib/app-config';
 import { breadcrumbsFor, navigationFor } from '../lib/modules';
+
+const { marketingUrl } = getRuntimeConfig();
+const externalLinks = marketingUrl ? [{ label: 'Landing site', href: marketingUrl }] : undefined;
 
 /** Full-page placeholder while the session is being resolved (prevents a flash of the sign-in redirect). */
 function ShellSkeleton() {
@@ -73,6 +76,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       user={{ name: user.name, email: user.email, role: user.role, avatarUrl: user.avatarUrl }}
       onSignOut={() => void signOut()}
       notifications={<NotificationsMenu />}
+      externalLinks={externalLinks}
       statusChip={isDemoMode ? <Badge variant="warning" dot>Demo data</Badge> : undefined}
     >
       {moduleDisabled ? (

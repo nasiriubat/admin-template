@@ -25,6 +25,8 @@ export interface AppShellProps {
   notifications?: ReactNode;
   statusChip?: ReactNode;
   paletteActions?: PaletteAction[];
+  /** Links to related apps, shown in the account menu and command palette (open in a new tab). */
+  externalLinks?: Array<{ label: string; href: string }>;
 }
 
 const COLLAPSED_KEY = 'nexus_sidebar_collapsed';
@@ -39,7 +41,7 @@ function isTypingTarget(target: EventTarget | null) {
  * Persistent application frame: sidebar (desktop), top bar, breadcrumb row, content canvas,
  * bottom navigation + drawer (mobile). Mount it once in a layout so it never remounts on navigation.
  */
-export function AppShell({ children, navigation, resolveBreadcrumbs, appName, appVersion, user, onSignOut, notifications, statusChip, paletteActions }: AppShellProps) {
+export function AppShell({ children, navigation, resolveBreadcrumbs, appName, appVersion, user, onSignOut, notifications, statusChip, paletteActions, externalLinks }: AppShellProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [pinned, setPinned] = useState(true);
@@ -94,6 +96,13 @@ export function AppShell({ children, navigation, resolveBreadcrumbs, appName, ap
 
   const crumbs = useMemo(() => override ?? resolveBreadcrumbs(pathname), [override, resolveBreadcrumbs, pathname]);
   const mobileItems = useMemo(() => pickMobileItems(navigation), [navigation]);
+  const allActions = useMemo<PaletteAction[]>(
+    () => [
+      ...(paletteActions ?? []),
+      ...(externalLinks ?? []).map((l) => ({ id: `ext-${l.href}`, label: `${l.label} (new tab)`, icon: 'ExternalLink', keywords: ['website', 'landing', 'marketing'], run: () => void window.open(l.href, '_blank', 'noopener,noreferrer') })),
+    ],
+    [paletteActions, externalLinks],
+  );
   const openPalette = useCallback(() => setPaletteOpen(true), []);
   const openMenu = useCallback(() => setMenuOpen(true), []);
   const shell = useMemo(() => ({ setBreadcrumbs: setOverride, openCommandPalette: openPalette, openMobileMenu: openMenu }), [openPalette, openMenu]);
@@ -111,10 +120,11 @@ export function AppShell({ children, navigation, resolveBreadcrumbs, appName, ap
         <div className="flex flex-1">
           <Sidebar groups={navigation} appName={appName} appVersion={appVersion} isCollapsed={collapsed} onToggleCollapse={toggleCollapsed} isPinned={pinned} onTogglePin={togglePinned} />
           <div className="flex min-w-0 flex-1 flex-col">
-            <TopBar appName={appName} user={user} onOpenSearch={openPalette} onSignOut={onSignOut} notifications={notifications} statusChip={statusChip} onInstallApp={canInstall ? install : undefined} />
+            <TopBar appName={appName} user={user} onOpenSearch={openPalette} onSignOut={onSignOut} notifications={notifications} statusChip={statusChip} onInstallApp={canInstall ? install : undefined} externalLinks={externalLinks} />
             <Breadcrumbs items={crumbs} />
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl flex-1 px-4 py-5 pb-[calc(5.5rem+env(safe-area-inset-bottom))] outline-none md:px-6 md:py-6 md:pb-10 lg:px-8">
-              {children}
+            {/* Canvas gutter around one full-width content surface: page content never floats on the gray canvas. */}
+            <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col px-0 pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-0 outline-none md:p-3 md:pb-3 lg:p-4">
+              <div className="flex-1 border-border bg-surface p-4 text-text max-md:border-y md:rounded-card md:border md:p-6 lg:p-8">{children}</div>
             </main>
           </div>
         </div>
@@ -122,7 +132,7 @@ export function AppShell({ children, navigation, resolveBreadcrumbs, appName, ap
         <MobileBottomNav items={mobileItems} onOpenMenu={openMenu} menuOpen={menuOpen} />
         <MobileNavSheet open={menuOpen} onOpenChange={setMenuOpen} groups={navigation} appName={appName} user={user} onSignOut={onSignOut} />
         <PwaInstallBanner canInstall={canInstall} onInstall={install} />
-        <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} groups={navigation} actions={paletteActions} onSignOut={onSignOut} />
+        <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} groups={navigation} actions={allActions} onSignOut={onSignOut} />
       </div>
     </ShellProvider>
   );

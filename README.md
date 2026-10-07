@@ -50,10 +50,17 @@ The backend is intentionally decoupled. FastAPI, Flask, Laravel, Django, Node, G
 
 ```bash
 pnpm install
-cp .env.example apps/admin/.env.local   # optional: demo mode works without it
-pnpm dev                                # admin on http://localhost:3000
-pnpm dev:marketing                      # landing pages on http://localhost:3200
+pnpm dev
 ```
+
+One command starts everything and opens the admin in your browser:
+
+| App | URL |
+| --- | --- |
+| Admin dashboard | http://localhost:3000 |
+| Landing site (marketing) | http://localhost:3200 |
+
+The admin has a **Landing site** entry in the account menu (top right) and in the command palette (`Ctrl/⌘ K`); both open the marketing site in a new tab. The marketing site has an **Admin demo** link that opens the admin. Use `pnpm dev --no-open` to skip opening the browser, `pnpm dev --only=admin` (or `--only=marketing`) to run a single app. Optional: `cp .env.example apps/admin/.env.local`.
 
 Sign in at `/login` with the demo accounts (demo mode only):
 
@@ -71,7 +78,8 @@ Any password of 8+ characters works in demo mode. **Demo mode uses an in-memory 
 
 | Command | What it does |
 | --- | --- |
-| `pnpm dev` / `pnpm build` / `pnpm start` | Run, build and serve the admin app |
+| `pnpm dev` | Run the admin and the marketing site together (opens the admin) |
+| `pnpm build` / `pnpm start` | Build and serve the admin app |
 | `pnpm typecheck` | TypeScript across every workspace package |
 | `pnpm lint` | ESLint (Next.js core-web-vitals + TypeScript rules) |
 | `pnpm test` | Vitest unit and component tests |

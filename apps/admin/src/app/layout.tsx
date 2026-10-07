@@ -34,8 +34,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Resolve the stored theme before first paint so there is no light/dark or preset flash. */}
-        <style nonce={nonce} dangerouslySetInnerHTML={{ __html: themeCss }} />
-        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <style nonce={nonce} suppressHydrationWarning dangerouslySetInnerHTML={{ __html: themeCss }} />
+        <script nonce={nonce} suppressHydrationWarning dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
         <Providers>

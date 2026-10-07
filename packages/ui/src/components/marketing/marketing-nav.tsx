@@ -33,7 +33,15 @@ export function MarketingNav({ brand, links, cta, secondaryCta }: { brand: strin
         <div className="hidden items-center gap-2 md:flex">
           {secondaryCta && (
             <Button variant="ghost" asChild>
-              <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+              {/^https?:\/\//.test(secondaryCta.href) ? (
+                <a href={secondaryCta.href} target="_blank" rel="noopener noreferrer">
+                  {secondaryCta.label}
+                  <IconRenderer name="ExternalLink" className="size-3.5" />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ) : (
+                <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+              )}
             </Button>
           )}
           <Button asChild>

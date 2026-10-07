@@ -1,4 +1,7 @@
+import { getRuntimeConfig } from '@nexus/config';
 import type { MarketingLink } from '@nexus/ui';
+
+const { adminUrl } = getRuntimeConfig();
 
 export const siteBrand = 'Nexus';
 export const siteTagline = 'One design system for every admin and landing page you ship.';
@@ -13,7 +16,8 @@ export const primaryLinks: MarketingLink[] = [
 ];
 
 export const primaryCta: MarketingLink = { label: 'Start free', href: '/pricing' };
-export const secondaryCta: MarketingLink = { label: 'Contact', href: '/contact' };
+/** Opens the admin app in a new tab when its URL is known (always in development, via NEXT_PUBLIC_ADMIN_URL in production). */
+export const secondaryCta: MarketingLink = adminUrl ? { label: 'Admin demo', href: adminUrl } : { label: 'Contact', href: '/contact' };
 
 export const footerColumns: Array<{ title: string; links: MarketingLink[] }> = [
   { title: 'Templates', links: [{ label: 'SaaS', href: '/' }, { label: 'AI product', href: '/ai' }, { label: 'Enterprise', href: '/enterprise' }] },

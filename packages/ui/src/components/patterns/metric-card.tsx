@@ -22,7 +22,7 @@ export function MetricCard({ label, value, delta, deltaLabel, trend, invert, ico
   const direction = trend ?? (delta?.startsWith('-') ? 'down' : delta ? 'up' : 'flat');
   const good = direction === 'flat' ? null : (direction === 'up') !== Boolean(invert);
   return (
-    <div className={cn('rounded-card border border-border bg-surface p-[var(--card-padding)] shadow-card', className)} aria-busy={loading || undefined}>
+    <div className={cn('rounded-card border border-border bg-surface p-[var(--card-padding)]', className)} aria-busy={loading || undefined}>
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm font-medium text-text-muted">{label}</p>
         {icon && (

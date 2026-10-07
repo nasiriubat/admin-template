@@ -8,6 +8,10 @@ export interface RuntimeConfig {
   defaultTheme: string;
   /** True when the built-in in-memory API and demo sign-in are active. Never use in production. */
   demoMode: boolean;
+  /** Public marketing site, shown as a link in the admin. Defaults to localhost in development only. */
+  marketingUrl: string;
+  /** Admin app, shown as a link on the marketing site. Defaults to localhost in development only. */
+  adminUrl: string;
 }
 
 export function getRuntimeConfig(): RuntimeConfig {
@@ -23,5 +27,7 @@ export function getRuntimeConfig(): RuntimeConfig {
     apiBaseUrl,
     defaultTheme: process.env.NEXT_PUBLIC_DEFAULT_THEME?.trim() || 'modern-saas',
     demoMode,
+    marketingUrl: (process.env.NEXT_PUBLIC_MARKETING_URL ?? (isProduction ? '' : 'http://localhost:3200')).trim().replace(/\/+$/, ''),
+    adminUrl: (process.env.NEXT_PUBLIC_ADMIN_URL ?? (isProduction ? '' : 'http://localhost:3000')).trim().replace(/\/+$/, ''),
   };
 }

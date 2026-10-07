@@ -9,7 +9,7 @@ export const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & 
         ref={ref}
         className={cn(
           'rounded-card border border-border text-text',
-          elevated ? 'bg-surface-elevated shadow-popover' : 'bg-surface shadow-card',
+          elevated ? 'bg-surface-elevated shadow-popover' : 'bg-surface',
           className,
         )}
         {...props}
