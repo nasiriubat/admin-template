@@ -11,6 +11,4 @@ export * from './integrations-grid';
 export * from './team-grid';
 export * from './prose';
 export * from './docs-layout';
-export * from './contact-schema';
-export * from './contact-form';
 export * from './motion';

@@ -10,7 +10,7 @@
  * features/users does. It is one file here only to keep the template compact.
  */
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import type { ListQuery } from '@nexus/api-client';
 import { api } from '../_shared/api';
 

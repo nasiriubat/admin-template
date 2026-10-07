@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import { LANGUAGES, NOTIFICATION_EVENTS, TIMEZONES } from './types';
 
 export const DOMAIN_PATTERN = /^(?=.{1,253}$)([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/;

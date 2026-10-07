@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
+import { m, type Variants } from 'framer-motion';
 import { Children, forwardRef, useImperativeHandle, useRef, type CSSProperties, type ReactNode } from 'react';
 import { useRevealPhase } from './shared';
 
@@ -50,7 +50,7 @@ export const Reveal = forwardRef<HTMLElement, RevealProps>(function Reveal(
   const ref = useRef<HTMLElement>(null);
   useImperativeHandle(forwardedRef, () => ref.current as HTMLElement);
   const { phase } = useRevealPhase(ref, { once, amount });
-  const MotionTag = motion[as] as typeof motion.div;
+  const MotionTag = m[as] as typeof m.div;
   const shown: Record<string, number | string> = { opacity: 1, x: 0, y: 0, scale: 1, filter: 'blur(0px)' };
   const variants: Variants = {
     hidden: { ...hiddenState(variant, direction, distance), transition: { duration: 0 } },

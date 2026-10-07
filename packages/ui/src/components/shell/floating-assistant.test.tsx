@@ -1,7 +1,8 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { AssistantProvider, FloatingAssistant, useAssistant } from './floating-assistant';
+import { AssistantProvider, useAssistant } from './floating-assistant';
+import { FloatingAssistant } from './floating-assistant-widget';
 
 vi.mock('@nexus/theme', () => ({ useTheme: () => ({ resolvedMode: 'light', toggleMode: () => {} }) }));
 

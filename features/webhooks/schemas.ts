@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import { validateWebhookUrl } from './url-safety';
 import { WEBHOOK_EVENTS } from './types';
 

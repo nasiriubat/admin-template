@@ -1,4 +1,5 @@
-import { ContactForm, PageHero, Reveal } from '@nexus/ui/marketing';
+import { PageHero, Reveal } from '@nexus/ui/marketing';
+import { ContactForm } from '@nexus/ui/marketing-contact';
 import { Page } from '../../components/page';
 import { contactEmail, pageMetadata } from '../../lib/seo';
 

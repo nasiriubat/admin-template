@@ -11,6 +11,7 @@ See `.env.example`. Public variables are compiled into the bundle at build time.
 | `NEXT_PUBLIC_APP_NAME`, `NEXT_PUBLIC_DEFAULT_THEME` | Branding defaults |
 | `NEXUS_SESSION_COOKIE` | Server-only name of the session cookie checked by the middleware |
 | `CSP_CONNECT_SRC` | Extra origins allowed by the Content-Security-Policy |
+| `CSP_UPGRADE_INSECURE_REQUESTS` | `true` adds `upgrade-insecure-requests` (use on https-only hosts; leave off for plain-http/local Docker, where it would break API calls) |
 
 ## Docker
 
@@ -34,3 +35,10 @@ Terminate TLS in front of the container and keep the backend on the same site as
 ## CI
 
 `.github/workflows/ci.yml` runs typecheck, lint, unit tests, build and dependency audit, then Playwright on desktop and mobile viewports.
+
+## Performance
+
+- Charts (Recharts), the workflow builder (React Flow), the command palette (cmdk) and the floating assistant load on demand, so they cost nothing until used.
+- The admin has no framer-motion (CSS animation only); the marketing site uses `LazyMotion` with the DOM-animation feature set.
+- Marketing pages import from `@nexus/ui/marketing` (and `@nexus/ui/marketing-contact` for the form) instead of the admin barrel.
+- Measure with Lighthouse against a production build: `pnpm build && pnpm start`, then e.g. `npx lighthouse http://localhost:3000/login`. Reference scores: marketing performance ~95, accessibility 100.

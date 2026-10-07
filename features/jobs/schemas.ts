@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 
 /** Body of POST /jobs/retry. Bulk retry always names the jobs explicitly. */
 export const bulkRetrySchema = z.object({

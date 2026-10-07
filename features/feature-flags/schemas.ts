@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 
 export const FLAG_KEY_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 

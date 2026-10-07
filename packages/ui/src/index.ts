@@ -13,6 +13,7 @@ export * from './components/shell/notification-bell';
 export * from './components/shell/theme-controls';
 export * from './components/shell/brand-mark';
 export * from './components/shell/floating-assistant';
+export * from './components/shell/floating-assistant-widget';
 
 // Primitives
 export * from './components/ui/button';

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 
 /** One schema per step: each step validates on its own, and the review step shows the merged result. */
 export const accountStepSchema = z.object({

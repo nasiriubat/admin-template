@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import { parseTags } from './ai-utils';
 
 const httpsUrl = z

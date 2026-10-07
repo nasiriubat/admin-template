@@ -1,10 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useRef, type ReactNode } from 'react';
 import { useRevealPhase } from '@nexus/ui/marketing';
 
-const tags = { div: motion.div, li: motion.li } as const;
+const tags = { div: m.div, li: m.li } as const;
 
 /**
  * Spring entrance on scroll. Like `Reveal`, content is fully visible on the server and under

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import { ROLE_OPTIONS } from '../_shared/roles';
 
 const roleIds = ROLE_OPTIONS.map((r) => r.value) as [string, ...string[]];

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { m, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 import { BrowserFrame, Reveal } from '@nexus/ui/marketing';
 import { overviewModule, zoomCaptions } from '../../content/product';
@@ -20,10 +20,10 @@ function Caption({ p, index }: { p: MotionValue<number>; index: number }) {
   const y = useTransform(opacity, [0, 1], [12, 0]);
   const c = zoomCaptions[index]!;
   return (
-    <motion.li style={{ opacity, y }} className="absolute inset-x-0 bottom-0 text-center">
+    <m.li style={{ opacity, y }} className="absolute inset-x-0 bottom-0 text-center">
       <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{c.title}</h3>
       <p className="mx-auto mt-2 max-w-xl text-text-muted">{c.body}</p>
-    </motion.li>
+    </m.li>
   );
 }
 
@@ -36,9 +36,9 @@ function Pinned() {
       <div className="sticky top-0 flex h-dvh flex-col items-center justify-center gap-8 px-6 pb-4 pt-20">
         <div className="w-full max-w-4xl overflow-hidden rounded-card">
           <BrowserFrame url="app.nexus.example/revenue" screenClassName="aspect-[16/9] overflow-hidden">
-            <motion.div style={{ scale, transformOrigin: '62% 58%' }} className="h-full will-change-transform">
+            <m.div style={{ scale, transformOrigin: '62% 58%' }} className="h-full will-change-transform">
               <DashboardMock data={overviewModule} className="h-full" />
-            </motion.div>
+            </m.div>
           </BrowserFrame>
         </div>
         <ol aria-label="Zoom story" className="relative h-28 w-full max-w-2xl">

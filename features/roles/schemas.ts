@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 
 export const ROLE_NAME_MIN = 2;
 export const ROLE_NAME_MAX = 40;

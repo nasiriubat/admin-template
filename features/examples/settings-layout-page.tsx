@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import {
   Alert,
   Button,

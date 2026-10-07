@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import type { DocumentType } from './types';
 
 export const MAX_DOCUMENT_SIZE = 10 * 1024 * 1024;

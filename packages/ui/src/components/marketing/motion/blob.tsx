@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useMemo } from 'react';
 import { cn } from '../../../lib/utils';
 import { usePrefersReducedMotion } from './shared';
@@ -52,7 +52,7 @@ export function Blob({ tone = 'primary', seed = 7, duration = 14, opacity = 0.2,
     <svg aria-hidden="true" focusable="false" viewBox="0 0 200 200" className={cn('block', toneFill[tone], className)}>
       {morph ? (
         // `d` goes through initial/animate (not a prop) so framer-motion never renders an undefined path.
-        <motion.path
+        <m.path
           initial={{ d: shapes[0]! }}
           animate={{ d: [shapes[0]!, shapes[1]!, shapes[2]!, shapes[0]!] }}
           fillOpacity={opacity}

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 
 /** Date-range filter: both ends optional (`YYYY-MM-DD`), but `from` may not be after `to`. */
 export const dateRangeSchema = z

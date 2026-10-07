@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useFieldArray, type FieldValues } from 'react-hook-form';
-import type { z } from 'zod';
+import type { z } from '../_shared/zod';
 import { Button, FormField, IconRenderer, Input, Select, Textarea, useZodForm } from '@nexus/ui';
 import { FIELD_SPECS, type FieldSpec } from './field-specs';
 import { extractVariables } from './graph';

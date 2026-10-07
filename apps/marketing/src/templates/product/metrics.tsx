@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { m, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 import { CountUp, CurvedSection, usePrefersReducedMotion } from '@nexus/ui/marketing';
 import { metrics } from '../../content/product';
@@ -10,7 +10,7 @@ function Bar({ progress, fraction, reduced }: { progress: MotionValue<number>; f
   const scaleX = useTransform(progress, (p) => ease(windowProgress(p, 0.15, 0.6)) * fraction);
   return (
     <div aria-hidden="true" className="mt-5 h-1.5 overflow-hidden rounded-full bg-primary-foreground/25">
-      <motion.div style={reduced ? { scaleX: fraction } : { scaleX }} className="h-full origin-left rounded-full bg-primary-foreground" />
+      <m.div style={reduced ? { scaleX: fraction } : { scaleX }} className="h-full origin-left rounded-full bg-primary-foreground" />
     </div>
   );
 }

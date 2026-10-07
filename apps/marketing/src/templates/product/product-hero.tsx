@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { BrowserFrame, Badge, Button, Float, GradientMesh, IconRenderer, Orbs, Reveal, WaveDivider, usePrefersReducedMotion } from '@nexus/ui/marketing';
 import { overviewModule } from '../../content/product';
@@ -57,11 +57,11 @@ export function ProductHero() {
           <Chip icon="TrendingUp" text="Revenue up 12%" className="-left-6 top-10" delay={0} />
           <Chip icon="ShieldCheck" text="Audit trail on" className="-right-6 top-1/3" delay={-2} />
           <Chip icon="Smartphone" text="Installable PWA" className="-left-2 bottom-12" delay={-4} />
-          <motion.div style={reduced ? undefined : { rotateX, scale, y, transformOrigin: '50% 100%' }} className="will-change-transform">
+          <m.div style={reduced ? undefined : { rotateX, scale, y, transformOrigin: '50% 100%' }} className="will-change-transform">
             <BrowserFrame url="app.nexus.example/overview" screenClassName="aspect-[16/11] sm:aspect-[16/10]">
               <DashboardMock data={overviewModule} className="h-full" />
             </BrowserFrame>
-          </motion.div>
+          </m.div>
         </div>
       </div>
       <WaveDivider variant="smooth" fill="canvas" className="absolute inset-x-0 bottom-0 -z-10" heightClass="h-8 md:h-14" />

@@ -25,7 +25,8 @@ function buildCsp(nonce: string) {
     "base-uri 'self'",
     "form-action 'self'",
     "frame-ancestors 'none'",
-    ...(isDev ? [] : ['upgrade-insecure-requests']),
+    // Opt-in: on plain-http deployments (local Docker, internal hosts) it would upgrade API calls to https and break them.
+    ...(!isDev && process.env.CSP_UPGRADE_INSECURE_REQUESTS === 'true' ? ['upgrade-insecure-requests'] : []),
   ].join('; ');
 }
 

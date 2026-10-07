@@ -18,6 +18,8 @@ All notable changes to this product should be documented here.
 
 ### Changed
 
+- Performance: charts, workflow builder, command palette and assistant load on demand; admin drops framer-motion; marketing uses LazyMotion and a lean entry (dashboard 280 kB -> 150 kB, marketing 282 kB -> 223 kB first-load JS); Lighthouse performance 96-97, accessibility/best-practices/SEO 100 on marketing
+- Zod runs in jitless mode so the eval-free CSP is never violated; `upgrade-insecure-requests` is now opt-in (`CSP_UPGRADE_INSECURE_REQUESTS`)
 - Page content sits on one full-width surface panel (no more centered column on a gray canvas)
 - `pnpm dev` starts the admin and the marketing site together and opens the admin
 - Shell is now mounted once per layout instead of per page

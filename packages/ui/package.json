@@ -8,7 +8,8 @@
     ".": "./src/index.ts",
     "./components/*": "./src/components/*",
     "./lib/*": "./src/lib/*",
-    "./marketing": "./src/marketing.ts"
+    "./marketing": "./src/marketing.ts",
+    "./marketing-contact": "./src/marketing-contact.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

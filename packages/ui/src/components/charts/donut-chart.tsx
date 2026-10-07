@@ -1,29 +1,21 @@
 'use client';
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import { CHART_TONES, toneColor, tooltipStyles, type ChartTone } from './chart-theme';
+import { CHART_TONES, toneColor, tooltipStyles } from './chart-theme';
+import type { DonutChartProps } from './chart-types';
 
-export interface DonutDatum {
-  name: string;
-  value: number;
-  tone?: ChartTone;
-}
 
-export function DonutChart({
+
+
+
+export function DonutChartImpl({
   data,
   height = 220,
   centerLabel,
   centerValue,
   summary,
   valueFormatter = (v) => v.toLocaleString(),
-}: {
-  data: DonutDatum[];
-  height?: number;
-  centerLabel?: string;
-  centerValue?: string;
-  summary: string;
-  valueFormatter?: (v: number) => string;
-}) {
+}: DonutChartProps) {
   const total = data.reduce((sum, d) => sum + d.value, 0);
   return (
     <figure role="img" aria-label={summary} className="m-0">

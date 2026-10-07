@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { AuthError, safeRedirectPath, useAuth } from '@nexus/auth';
 import { Alert, Button, Checkbox, FormField, IconRenderer, Input, useZodForm } from '@nexus/ui';
+import { getRuntimeConfig } from '@nexus/config';
 import { isDemoMode } from '../_shared/api';
 import { forgotPasswordSchema, loginSchema, resetPasswordSchema } from './schemas';
 
@@ -26,8 +27,15 @@ export function LoginForm() {
     }
   });
 
+  const notConfigured = !isDemoMode && !getRuntimeConfig().apiBaseUrl;
+
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-4">
+      {notConfigured && (
+        <Alert variant="warning" title="No backend configured">
+          Set <code>NEXT_PUBLIC_API_BASE_URL</code> at build time to your API, or <code>NEXT_PUBLIC_DEMO_MODE=true</code> for a demo build (never in production).
+        </Alert>
+      )}
       {isDemoMode && (
         <Alert variant="info" title="Demo mode">
           Sign in with <strong>admin@example.com</strong> (full access), <strong>editor@example.com</strong> or <strong>viewer@example.com</strong> and any password of 8+ characters.

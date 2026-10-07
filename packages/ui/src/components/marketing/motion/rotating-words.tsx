@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { cn } from '../../../lib/utils';
 import { usePrefersReducedMotion } from './shared';
@@ -46,7 +46,7 @@ export function RotatingWords({ words, interval = 2400, className, wordClassName
           <span className={wordClassName}>{words[0]}</span>
         ) : (
           <AnimatePresence mode="wait" initial={false}>
-            <motion.span
+            <m.span
               key={words[i]}
               className={cn('inline-block', wordClassName)}
               initial={{ y: '60%', opacity: 0 }}
@@ -55,7 +55,7 @@ export function RotatingWords({ words, interval = 2400, className, wordClassName
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             >
               {words[i]}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
         )}
       </span>

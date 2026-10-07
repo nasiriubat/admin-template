@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import { isValidTimeZone, validateCron } from './cron';
 import { NODE_KINDS, type NodeKind } from './types';
 

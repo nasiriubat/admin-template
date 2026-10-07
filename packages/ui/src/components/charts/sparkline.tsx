@@ -1,10 +1,12 @@
 'use client';
 
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
-import { toneColor, type ChartTone } from './chart-theme';
+import { toneColor } from './chart-theme';
+import type { SparklineProps } from './chart-types';
 
-/** Tiny trend line for metric cards. Decorative: the metric value carries the information. */
-export function Sparkline({ values, tone = 'primary', height = 36 }: { values: number[]; tone?: ChartTone; height?: number }) {
+
+
+export function SparklineImpl({ values, tone = 'primary', height = 36 }: SparklineProps) {
   const data = values.map((v, i) => ({ i, v }));
   const color = toneColor(tone);
   return (

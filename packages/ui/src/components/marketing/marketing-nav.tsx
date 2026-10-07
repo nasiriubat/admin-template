@@ -20,7 +20,7 @@ export function MarketingNav({ brand, links, cta, secondaryCta }: { brand: strin
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-canvas/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight" aria-label={`${brand} home`}>
+        <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
           <BrandMark className="size-8 text-sm" /> {brand}
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">

@@ -49,7 +49,7 @@ export function TopBar({ appName, user, onOpenSearch, onSignOut, notifications, 
       className={cn('sticky top-0 z-20 flex h-topbar items-center gap-2 border-b border-border bg-surface/90 px-3 pt-safe backdrop-blur-md md:gap-3 md:px-6', className)}
     >
       {/* Mobile brand (the sidebar is hidden below md) */}
-      <Link href="/" className="flex items-center gap-2.5 md:hidden" aria-label={`${appName} home`}>
+      <Link href="/" className="flex items-center gap-2.5 md:hidden">
         <BrandMark className="size-9 text-base" />
         <span className="max-w-[9rem] truncate text-sm font-semibold tracking-tight">{appName}</span>
       </Link>

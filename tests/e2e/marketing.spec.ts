@@ -21,6 +21,10 @@ for (const mode of ['light', 'dark'] as const) {
         const problems: string[] = [];
         page.on('pageerror', (e) => problems.push(e.message));
         page.on('console', (m) => m.type() === 'error' && problems.push(m.text()));
+        await page.addInitScript(() => {
+          (window as unknown as { __csp: string[] }).__csp = [];
+          document.addEventListener('securitypolicyviolation', (e) => (window as unknown as { __csp: string[] }).__csp.push(`${e.violatedDirective} ${e.blockedURI}`));
+        });
         await open(page, route, mode);
         const height = await page.evaluate(() => document.documentElement.scrollHeight);
         for (let y = 0; y < height; y += 600) {
@@ -28,6 +32,7 @@ for (const mode of ['light', 'dark'] as const) {
           await page.waitForTimeout(60);
         }
         expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), 'horizontal overflow').toBeLessThanOrEqual(1);
+        expect(await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp), 'CSP violations').toEqual([]);
         expect(problems).toEqual([]);
       });
     }

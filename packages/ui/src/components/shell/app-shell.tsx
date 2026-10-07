@@ -1,12 +1,12 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useTheme } from '@nexus/theme';
 import { pickMobileItems, type BreadcrumbCrumb, type NavGroupConfig } from '@nexus/config';
 import { Breadcrumbs } from './breadcrumbs';
-import { CommandPalette, type PaletteAction } from './command-palette';
-import { AssistantProvider, FloatingAssistant, useAssistant, type AssistantAction } from './floating-assistant';
+import type { PaletteAction } from './command-palette';
+import { AssistantProvider, useAssistant, type AssistantAction } from './floating-assistant';
 import { MobileBottomNav } from './mobile-bottom-nav';
 import { MobileNavSheet } from './mobile-nav-sheet';
 import { OfflineBanner } from './offline-banner';
@@ -33,6 +33,10 @@ export interface AppShellProps {
   assistant?: { enabledByDefault?: boolean; actions?: AssistantAction[] };
 }
 
+// Loaded on demand: cmdk and the assistant's popover are not needed for first paint.
+const CommandPalette = lazy(() => import('./command-palette').then((m) => ({ default: m.CommandPalette })));
+const FloatingAssistant = lazy(() => import('./floating-assistant-widget').then((m) => ({ default: m.FloatingAssistant })));
+
 const COLLAPSED_KEY = 'nexus_sidebar_collapsed';
 const PINNED_KEY = 'nexus_sidebar_pinned';
 
@@ -51,6 +55,10 @@ function AppShellInner({ children, navigation, resolveBreadcrumbs, appName, appV
   const [pinned, setPinned] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [paletteLoaded, setPaletteLoaded] = useState(false);
+  useEffect(() => {
+    if (paletteOpen) setPaletteLoaded(true);
+  }, [paletteOpen]);
   const [override, setOverride] = useState<BreadcrumbCrumb[] | null>(null);
   const { canInstall, install } = usePwaInstall();
 
@@ -148,10 +156,16 @@ function AppShellInner({ children, navigation, resolveBreadcrumbs, appName, appV
         <MobileBottomNav items={mobileItems} onOpenMenu={openMenu} menuOpen={menuOpen} />
         <MobileNavSheet open={menuOpen} onOpenChange={setMenuOpen} groups={navigation} appName={appName} user={user} onSignOut={onSignOut} />
         {assistant && assistantControl?.enabled && (
-          <FloatingAssistant actions={assistantActions} />
+          <Suspense fallback={null}>
+            <FloatingAssistant actions={assistantActions} />
+          </Suspense>
         )}
         <PwaInstallBanner canInstall={canInstall} onInstall={install} />
-        <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} groups={navigation} actions={allActions} onSignOut={onSignOut} />
+        {paletteLoaded && (
+          <Suspense fallback={null}>
+            <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} groups={navigation} actions={allActions} onSignOut={onSignOut} />
+          </Suspense>
+        )}
       </div>
     </ShellProvider>
   );

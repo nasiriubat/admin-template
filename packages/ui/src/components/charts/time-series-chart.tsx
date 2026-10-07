@@ -14,32 +14,18 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { AXIS_COLOR, CHART_TONES, GRID_COLOR, toneColor, tooltipStyles, type ChartTone } from './chart-theme';
+import { AXIS_COLOR, CHART_TONES, GRID_COLOR, toneColor, tooltipStyles } from './chart-theme';
+import type { ChartSeries, TimeSeriesChartProps } from './chart-types';
 
-export interface ChartSeries {
-  key: string;
-  label: string;
-  tone?: ChartTone;
-}
 
-export interface TimeSeriesChartProps<T extends object> {
-  data: T[];
-  xKey: keyof T & string;
-  series: ChartSeries[];
-  variant?: 'area' | 'line' | 'bar';
-  stacked?: boolean;
-  height?: number;
-  valueFormatter?: (value: number) => string;
-  xFormatter?: (value: string) => string;
-  /** Accessible summary read by screen readers, e.g. "Requests per day, last 14 days". */
-  summary: string;
-}
+
+
 
 /**
  * Area / line / bar chart over a shared x axis. Exposes a visually hidden data table so the data
  * is available to assistive tech (charts alone are not accessible).
  */
-export function TimeSeriesChart<T extends object>({
+export function TimeSeriesChartImpl<T extends object>({
   data,
   xKey,
   series,

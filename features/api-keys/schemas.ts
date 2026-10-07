@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import { API_KEY_SCOPES } from './types';
 
 const scopeIds = API_KEY_SCOPES.map((s) => s.value);

@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+// Our CSP forbids eval; skip Zod's JIT probe (it would log a violation on every page that loads this).
+z.config({ jitless: true });
+
 export const contactTopics = [
   { value: 'sales', label: 'Sales and pricing' },
   { value: 'support', label: 'Product support' },

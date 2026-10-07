@@ -25,7 +25,7 @@ const nextConfig = {
           // scripts are limited to same-origin plus Next's inline bootstrap.
           {
             key: 'Content-Security-Policy',
-            value: `default-src 'self'; script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'${isProd ? '' : ' ws:'}; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'${isProd ? '; upgrade-insecure-requests' : ''}`,
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'${isProd ? '' : ' ws:'}; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'${isProd && process.env.CSP_UPGRADE_INSECURE_REQUESTS === 'true' ? '; upgrade-insecure-requests' : ''}`,
           },
           ...(isProd ? [{ key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' }] : []),
         ],

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { m, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef, type HTMLAttributes, type PointerEvent, type ReactNode } from 'react';
 import { cn } from '../../../lib/utils';
 import { usePrefersReducedMotion } from './shared';
@@ -37,7 +37,7 @@ export function TiltCard({ maxTilt = 8, scale = 1.02, className, children, ...re
     s.set(1);
   };
   return (
-    <motion.div
+    <m.div
       ref={ref}
       onPointerMove={move}
       onPointerLeave={leave}
@@ -46,7 +46,7 @@ export function TiltCard({ maxTilt = 8, scale = 1.02, className, children, ...re
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -76,8 +76,8 @@ export function MagneticButton({ children, strength = 0.3, className }: Magnetic
     y.set(0);
   };
   return (
-    <motion.span ref={ref} onPointerMove={move} onPointerLeave={reset} className={cn('inline-block', className)} style={{ x, y }}>
+    <m.span ref={ref} onPointerMove={move} onPointerLeave={reset} className={cn('inline-block', className)} style={{ x, y }}>
       {children}
-    </motion.span>
+    </m.span>
   );
 }

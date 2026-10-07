@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { m, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useRef, type ReactNode } from 'react';
 import { cn } from '../../../lib/utils';
 import { usePrefersReducedMotion } from './shared';
@@ -24,9 +24,9 @@ export function Parallax({ children, className, offset = 60, scale }: ParallaxPr
   const s = useTransform(scrollYProgress, [0, 1], scale ?? [1, 1]);
   if (reduced) return <div className={className}>{children}</div>;
   return (
-    <motion.div ref={ref} className={cn('will-change-transform', className)} style={{ y, scale: s }}>
+    <m.div ref={ref} className={cn('will-change-transform', className)} style={{ y, scale: s }}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -43,7 +43,7 @@ export function ScrollProgress({ className, tone = 'primary', heightClass = 'h-1
   const { scrollYProgress } = useScroll();
   const smooth = useSpring(scrollYProgress, { stiffness: 140, damping: 28, restDelta: 0.001 });
   return (
-    <motion.div
+    <m.div
       aria-hidden="true"
       data-testid="scroll-progress"
       className={cn('pointer-events-none fixed inset-x-0 top-0 z-50 origin-left', heightClass, toneBg[tone], className)}

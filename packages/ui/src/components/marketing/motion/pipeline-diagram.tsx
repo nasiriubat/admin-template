@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useId, useRef, type ReactNode } from 'react';
 import { cn } from '../../../lib/utils';
 import { useRevealPhase } from './shared';
@@ -83,7 +83,7 @@ export function PipelineDiagram({ nodes, edges, title, travellingDots = true, as
         <svg viewBox={`0 0 ${W} ${H}`} focusable="false" className="absolute inset-0 size-full">
           {edgePaths.map((p, i) => (
             <g key={p.id}>
-              <motion.path
+              <m.path
                 id={p.id}
                 d={p.d}
                 fill="none"
@@ -127,7 +127,7 @@ export function AnimatedPath({ d, tone = 'primary', strokeWidth = 2, viewBox, cl
   const { phase } = useRevealPhase(ref, { amount: 0.4 });
   return (
     <svg ref={ref} aria-hidden="true" focusable="false" viewBox={viewBox} className={className}>
-      <motion.path
+      <m.path
         d={d}
         fill="none"
         strokeWidth={strokeWidth}

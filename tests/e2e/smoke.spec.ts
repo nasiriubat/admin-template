@@ -21,6 +21,11 @@ for (const mode of ['light', 'dark'] as const) {
       page.on('console', (m) => {
         if (m.type() === 'error') problems.push(`console: ${m.text()}`);
       });
+      // Any Content-Security-Policy violation (e.g. a library using eval) is a bug.
+      await page.addInitScript(() => {
+        (window as unknown as { __csp: string[] }).__csp = [];
+        document.addEventListener('securitypolicyviolation', (e) => (window as unknown as { __csp: string[] }).__csp.push(`${e.violatedDirective} ${e.blockedURI}`));
+      });
       await page.emulateMedia({ colorScheme: mode });
       await page.evaluate((m) => localStorage.setItem('nexus_theme_preferences', JSON.stringify({ mode: m })), mode);
       await page.goto(route);
@@ -36,6 +41,7 @@ for (const mode of ['light', 'dark'] as const) {
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
       const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
       expect(serious.map((v) => `${v.id}: ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`)).toEqual([]);
+      expect(await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp), 'CSP violations').toEqual([]);
       expect(problems).toEqual([]);
     });
   }

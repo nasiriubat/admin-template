@@ -58,7 +58,7 @@ export function Sidebar({ groups, appName = 'Nexus Admin', appVersion, isCollaps
         style={{ width: compact ? RAIL : FULL }}
       >
         <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
-          <Link href="/" className="flex min-w-0 items-center gap-3 rounded-lg" aria-label={`${appName} home`}>
+          <Link href="/" className="flex min-w-0 items-center gap-3 rounded-lg" aria-label={compact ? `${appName} home` : undefined}>
             <BrandMark />
             {!compact && (
               <span className="flex min-w-0 flex-col">

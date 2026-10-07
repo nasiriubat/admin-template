@@ -117,6 +117,8 @@ export function PricingPlans({ plans, groups, yearlyNote = 'billed yearly' }: { 
         {savings > 0 && <Badge variant="success">Save up to {savings}%</Badge>}
       </div>
 
+      {/* Keeps the heading outline h1 > h2 > h3 for pages where the plans follow the page hero directly. */}
+      <h2 className="sr-only">Plans</h2>
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {plans.map((plan, i) => {
           const price = planPrice(plan, cycle);

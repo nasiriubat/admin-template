@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { StickyShowcase, usePrefersReducedMotion } from '@nexus/ui/marketing';
 import { phoneScreens, type PhoneScreenData } from '../../content/product';
 import { PhoneDevice } from './phone-screen';
@@ -9,9 +9,9 @@ import { PhoneDevice } from './phone-screen';
 function PhoneStage({ screen }: { screen: PhoneScreenData }) {
   const reduced = usePrefersReducedMotion();
   return (
-    <motion.div initial={reduced ? false : { opacity: 0, y: 16, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}>
+    <m.div initial={reduced ? false : { opacity: 0, y: 16, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}>
       <PhoneDevice screen={screen} className="max-w-[16rem]" />
-    </motion.div>
+    </m.div>
   );
 }
 

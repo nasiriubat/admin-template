@@ -1,5 +1,5 @@
 import { graphSchema, scheduleSchema } from './schemas';
-import { z } from 'zod';
+import { z } from '../_shared/zod';
 import type { ScheduleConfig, WorkflowGraph } from './types';
 
 export const EXPORT_FORMAT = 'nexus.workflow';

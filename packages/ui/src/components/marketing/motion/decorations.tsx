@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useMemo, useRef, type ReactNode } from 'react';
 import { cn } from '../../../lib/utils';
 import { useRevealPhase } from './shared';
@@ -24,7 +24,7 @@ export function Squiggle({ children, tone = 'primary', animated = true, classNam
   const { phase } = useRevealPhase(ref, { amount: 0.6 });
   const svg = (
     <svg aria-hidden="true" focusable="false" viewBox="0 0 200 16" preserveAspectRatio="none" className={cn('block h-3 w-full', children && 'absolute inset-x-0 -bottom-2')}>
-      <motion.path
+      <m.path
         d={WAVE}
         fill="none"
         strokeWidth={3}
