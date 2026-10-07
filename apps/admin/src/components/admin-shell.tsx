@@ -8,11 +8,12 @@ import { getRuntimeConfig, isModuleEnabled, matchRoute } from '@nexus/config';
 import { allModules } from '@nexus/features';
 import { isDemoMode, UNAUTHORIZED_EVENT } from '@nexus/features/_shared';
 import { NotificationsMenu } from '@nexus/features/notifications';
-import { AppShell, Badge, Skeleton, UnauthorizedState } from '@nexus/ui';
+import { AppShell, Badge, type AssistantAction, Skeleton, UnauthorizedState } from '@nexus/ui';
 import { appConfig } from '../lib/app-config';
 import { breadcrumbsFor, navigationFor } from '../lib/modules';
 
 const { marketingUrl } = getRuntimeConfig();
+const assistantActions: AssistantAction[] = [{ id: 'new-user', label: 'Invite user', icon: 'UserPlus', href: '/users' }, { id: 'workflows', label: 'Workflows', icon: 'Workflow', href: '/workflows' }];
 const externalLinks = marketingUrl ? [{ label: 'Landing site', href: marketingUrl }] : undefined;
 
 /** Full-page placeholder while the session is being resolved (prevents a flash of the sign-in redirect). */
@@ -77,6 +78,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       onSignOut={() => void signOut()}
       notifications={<NotificationsMenu />}
       externalLinks={externalLinks}
+      assistant={{ enabledByDefault: appConfig.assistant.enabled, actions: assistantActions }}
       statusChip={isDemoMode ? <Badge variant="warning" dot>Demo data</Badge> : undefined}
     >
       {moduleDisabled ? (

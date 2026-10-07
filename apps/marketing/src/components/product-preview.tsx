@@ -1,4 +1,4 @@
-import { cn } from '@nexus/ui';
+import { cn } from '@nexus/ui/marketing';
 
 /** Lightweight, token-driven illustration of the admin UI (pure markup: no images to license or load). */
 export function ProductPreview({ compact, highlight = -1 }: { compact?: boolean; highlight?: number }) {

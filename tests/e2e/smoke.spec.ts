@@ -5,7 +5,7 @@ const ROUTES = [
   '/', '/analytics', '/users', '/users/u-001', '/roles', '/audit', '/health', '/logs', '/jobs', '/files',
   '/feature-flags', '/api-keys', '/webhooks', '/settings', '/theme-editor', '/notifications', '/profile',
   '/ai/providers', '/ai/models', '/ai/prompts', '/ai/usage', '/knowledge/documents', '/knowledge/sources', '/billing',
-  '/examples/components', '/examples/wizard', '/examples/detail', '/examples/crud', '/examples/settings-layout',
+  '/workflows', '/workflows/runs', '/workflows/wf-001', '/examples/components', '/examples/wizard', '/examples/detail', '/examples/crud', '/examples/settings-layout',
 ];
 
 test.beforeEach(async ({ page, context }) => {

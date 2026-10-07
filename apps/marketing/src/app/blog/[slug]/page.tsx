@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Avatar, Badge, ContentBlocks } from '@nexus/ui';
+import { Avatar, Badge, ContentBlocks, ScrollProgress } from '@nexus/ui/marketing';
 import { Page } from '../../../components/page';
 import { posts } from '../../../content/posts';
 import { readingTime } from '../../../lib/blog';
@@ -39,6 +39,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
   return (
     <Page cta={false}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(data) }} />
+      <ScrollProgress />
       <article className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
         <Link href="/blog" className="inline-flex min-h-11 items-center text-sm text-text-muted hover:text-text">
           ← All posts

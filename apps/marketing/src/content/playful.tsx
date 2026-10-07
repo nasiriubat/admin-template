@@ -1,0 +1,85 @@
+/** Copy for the Playful template: a consumer habit-and-community app called Circles (sample content, replace with your own). */
+export const playful = {
+  brand: 'Circles',
+  tagline: 'Small groups, shared goals, daily wins.',
+  links: [
+    { label: 'Features', href: '#features' },
+    { label: 'How it works', href: '#how' },
+    { label: 'Community', href: '#community' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'FAQ', href: '#faq' },
+  ],
+  cta: { label: 'Join free', href: '#join' },
+  hero: {
+    badge: 'New: weekly group challenges',
+    lead: 'Good habits stick better with',
+    word: 'friends',
+    description: 'Circles turns the things you keep meaning to do into tiny daily wins you share with people who cheer you on.',
+    rating: 4.8,
+    ratingCount: 18420,
+  },
+  people: [
+    { name: 'Maya Okafor' }, { name: 'Leo Brandt' }, { name: 'Sana Iqbal' }, { name: 'Tomas Rey' }, { name: 'Ines Duarte' }, { name: 'Kai Nakamura' },
+  ],
+  stickers: [
+    { label: '12 day streak', icon: 'Flame', tone: 'warning', rotate: -8, className: 'left-0 top-6 sm:-left-6' },
+    { label: 'Team high five', icon: 'Heart', tone: 'danger', rotate: 7, className: 'right-0 top-24 sm:-right-8' },
+    { label: 'New badge', icon: 'Star', tone: 'accent', rotate: -5, className: 'bottom-24 left-0 sm:-left-10' },
+    { label: 'Goal hit', icon: 'Zap', tone: 'success', rotate: 9, className: 'bottom-8 right-2 sm:-right-4' },
+  ],
+  phone: {
+    title: 'Morning circle',
+    habits: [
+      { label: 'Drink water', who: 'Maya', tone: 'info' },
+      { label: 'Ten minute walk', who: 'Leo', tone: 'success' },
+      { label: 'Read a chapter', who: 'Sana', tone: 'accent' },
+    ],
+  },
+  features: [
+    { icon: 'Users', title: 'Circles of up to eight', description: 'Invite friends, family or teammates into a small group where everyone can see and cheer progress.', tone: 'primary' },
+    { icon: 'Flame', title: 'Streaks that forgive', description: 'Miss a day? Spend a rest token and keep your streak. Life happens, momentum should not vanish.', tone: 'warning' },
+    { icon: 'Heart', title: 'Cheers, not pressure', description: 'Send a quick reaction or a voice note. No leaderboards that make anyone feel behind.', tone: 'danger' },
+    { icon: 'Gift', title: 'Weekly challenges', description: 'Join a themed challenge with your circle and unlock playful badges together.', tone: 'accent' },
+    { icon: 'Bell', title: 'Gentle nudges', description: 'Reminders arrive when you choose, in a tone you pick, and never at night.', tone: 'info' },
+    { icon: 'Compass', title: 'Your pace, your goals', description: 'Pick from hundreds of starter habits or write your own, then adjust any time.', tone: 'success' },
+  ],
+  steps: [
+    { title: 'Pick a tiny habit', description: 'Start with something that takes two minutes. Small is the whole point.' },
+    { title: 'Invite your circle', description: 'Share a link. Friends join in seconds, no account needed to peek.' },
+    { title: 'Check in and cheer', description: 'Tap to log your day, then send a cheer to someone else who did too.' },
+  ],
+  chips: [
+    { name: 'Maya', text: 'Day 41 of stretching!' },
+    { name: 'Leo', text: 'Our circle hit 500 walks' },
+    { name: 'Sana', text: 'Finished my third book' },
+    { name: 'Tomas', text: 'First 5k without stopping' },
+    { name: 'Ines', text: 'Cooked at home all week' },
+    { name: 'Kai', text: 'Up at 6am, again' },
+    { name: 'Noor', text: 'Meditated 30 days running' },
+    { name: 'Jonas', text: 'Phone-free dinners, day 20' },
+  ],
+  testimonials: [
+    { quote: 'I have tried a dozen habit apps. This is the first one my sister and I both still open every morning.', name: 'Maya Okafor', role: 'Runs with her sister', rating: 5 },
+    { quote: 'The rest tokens are genius. I missed a week while travelling and my streak was still there when I got back.', name: 'Leo Brandt', role: 'Frequent traveller', rating: 5 },
+    { quote: 'Our book club uses a circle to keep reading. We have not missed a month in a year.', name: 'Sana Iqbal', role: 'Book club host', rating: 4.5 },
+    { quote: 'It feels like a group chat that quietly makes me better. No guilt trips at all.', name: 'Tomas Rey', role: 'First-time runner', rating: 5 },
+  ],
+  pricing: [
+    { name: 'Starter', price: '$0', period: 'forever', description: 'Everything you need to start a circle.', features: ['One circle of up to 5 friends', '3 habits at a time', 'Daily nudges'], cta: { label: 'Start free', href: '#join' } },
+    { name: 'Together', price: '$4', period: 'per person, per month', description: 'The favourite for friends and families.', features: ['Unlimited circles of up to 8', 'Unlimited habits', 'Rest tokens and weekly challenges', 'Voice cheers'], cta: { label: 'Try Together free', href: '#join' }, featured: true },
+    { name: 'Club', price: '$12', period: 'per circle, per month', description: 'For clubs, classes and teams.', features: ['Circles of up to 50', 'Shared goals and reports', 'Priority support'], cta: { label: 'Start a club', href: '#join' } },
+  ],
+  faq: [
+    { q: 'Is Circles really free to start?', a: 'Yes. The Starter plan has no time limit and needs no card. Upgrade only if you want more circles or habits.' },
+    { q: 'Do my friends need to pay too?', a: 'No. Each person chooses their own plan, and anyone can join a circle on Starter.' },
+    { q: 'What if I miss a day?', a: 'Use a rest token. Together members earn one every week so a busy day never resets the streak.' },
+    { q: 'Who can see my progress?', a: 'Only the people in your circle. You decide what each habit shares, and you can leave any time.' },
+  ],
+  sections: [
+    { id: 'features', label: 'Features' },
+    { id: 'how', label: 'How it works' },
+    { id: 'community', label: 'Community' },
+    { id: 'pricing', label: 'Pricing' },
+    { id: 'faq', label: 'FAQ' },
+  ],
+};

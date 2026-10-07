@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 import { IconRenderer } from '../icons/icon-renderer';
+import { Parallax } from './motion/parallax';
+import { Reveal } from './motion/reveal';
 
 export interface FeatureRowItem {
   id?: string;
@@ -15,10 +17,10 @@ export interface FeatureRowItem {
 /** Alternating text / visual rows. On small screens the text always comes first. */
 export function FeatureRows({ items }: { items: FeatureRowItem[] }) {
   return (
-    <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 md:space-y-24 md:px-6 md:py-24">
+    <div className="mx-auto max-w-6xl space-y-16 overflow-x-clip px-4 py-16 md:space-y-24 md:px-6 md:py-24">
       {items.map((item, i) => (
-        <section key={item.title} id={item.id} aria-labelledby={`${item.id ?? `row-${i}`}-title`} className="grid scroll-mt-24 items-center gap-8 md:grid-cols-2 md:gap-14">
-          <div className={cn(i % 2 === 1 && 'md:order-2')}>
+        <section key={item.title} id={item.id} aria-labelledby={`${item.id ?? `row-${i}`}-title`} className="grid grid-cols-1 scroll-mt-24 items-center gap-8 md:grid-cols-2 md:gap-14">
+          <Reveal direction={i % 2 === 1 ? 'right' : 'left'} className={cn(i % 2 === 1 && 'md:order-2')}>
             <span className="mb-4 grid size-11 place-items-center rounded-xl bg-primary/10 text-primary">
               <IconRenderer name={item.icon} className="size-5" />
             </span>
@@ -37,8 +39,10 @@ export function FeatureRows({ items }: { items: FeatureRowItem[] }) {
                 ))}
               </ul>
             )}
-          </div>
-          <div className={cn(i % 2 === 1 && 'md:order-1')}>{item.visual}</div>
+          </Reveal>
+          <Reveal variant="scale" direction={i % 2 === 1 ? 'left' : 'right'} delay={0.1} className={cn(i % 2 === 1 && 'md:order-1')}>
+            <Parallax offset={14}>{item.visual}</Parallax>
+          </Reveal>
         </section>
       ))}
     </div>

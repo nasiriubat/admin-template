@@ -47,7 +47,7 @@ function NavList({ groups, current, onNavigate }: { groups: DocsNavGroup[]; curr
 export function DocsLayout({ groups, current, toc, prev, next, children }: { groups: DocsNavGroup[]; current?: string; toc?: Array<{ id: string; title: string }>; prev?: DocsPager; next?: DocsPager; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 md:px-6 lg:grid-cols-[14rem_minmax(0,1fr)] xl:grid-cols-[14rem_minmax(0,1fr)_13rem] lg:py-12">
+    <div className="mx-auto grid grid-cols-1 max-w-6xl gap-8 px-4 py-8 md:px-6 lg:grid-cols-[14rem_minmax(0,1fr)] xl:grid-cols-[14rem_minmax(0,1fr)_13rem] lg:py-12">
       <aside className="hidden lg:block">
         <div className="sticky top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto pr-2">
           <NavList groups={groups} current={current} />
@@ -94,7 +94,7 @@ export function DocsLayout({ groups, current, toc, prev, next, children }: { gro
         )}
         {children}
         {(prev || next) && (
-          <nav aria-label="Previous and next pages" className="mt-14 grid gap-3 border-t border-border pt-8 sm:grid-cols-2">
+          <nav aria-label="Previous and next pages" className="mt-14 grid grid-cols-1 gap-3 border-t border-border pt-8 sm:grid-cols-2">
             {prev ? (
               <Link href={prev.href} rel="prev" className="flex flex-col rounded-card border border-border bg-surface p-4 hover:border-primary">
                 <span className="text-xs text-text-muted">Previous</span>

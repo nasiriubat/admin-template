@@ -102,9 +102,9 @@ features/*         One folder per module: manifest, types, schemas, mock API, se
 
 ## What is in the box
 
-- **Admin app**: 19 modules (dashboard, analytics, users, roles & permissions, audit, health, logs, jobs, files, feature flags, API keys, webhooks, AI, knowledge base, billing, settings, theme editor, notifications, profile), auth pages, 5 theme presets, PWA.
+- **Admin app**: 20 modules (dashboard, analytics, users, roles & permissions, audit, health, logs, jobs, files, feature flags, API keys, webhooks, AI, **agent workflows with a drag-and-drop builder and schedules**, knowledge base, billing, settings, theme editor, notifications, profile), a floating quick-actions assistant (toggle per user or per deployment), auth pages, 5 theme presets, PWA.
 - **Examples** (`/examples/*`, removable): component gallery, multi-step wizard, detail page, CRUD scaffold, settings layout. See [docs/EXAMPLES.md](docs/EXAMPLES.md).
-- **Marketing site**: SaaS, AI and Enterprise landing templates plus pricing, features, about, customers, contact, changelog, blog, docs and legal templates.
+- **Marketing site**: five animated landing templates (Aurora, Neon, Editorial, Playful, Product) you can switch between live, plus pricing, features, about, customers, contact, changelog, blog, docs and legal templates.
 - **Email templates**: invite, password reset, invoice, security alert in `templates/emails`.
 - **Tooling**: CI, Dockerfile, Playwright + axe accessibility tests, `pnpm icons` (brand assets from `branding/logo.svg`), `pnpm screenshots`, `pnpm package:release`.
 

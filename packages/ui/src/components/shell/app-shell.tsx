@@ -2,9 +2,11 @@
 
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useTheme } from '@nexus/theme';
 import { pickMobileItems, type BreadcrumbCrumb, type NavGroupConfig } from '@nexus/config';
 import { Breadcrumbs } from './breadcrumbs';
 import { CommandPalette, type PaletteAction } from './command-palette';
+import { AssistantProvider, FloatingAssistant, useAssistant, type AssistantAction } from './floating-assistant';
 import { MobileBottomNav } from './mobile-bottom-nav';
 import { MobileNavSheet } from './mobile-nav-sheet';
 import { OfflineBanner } from './offline-banner';
@@ -27,6 +29,8 @@ export interface AppShellProps {
   paletteActions?: PaletteAction[];
   /** Links to related apps, shown in the account menu and command palette (open in a new tab). */
   externalLinks?: Array<{ label: string; href: string }>;
+  /** Floating quick-actions assistant. Users can switch it off in the account menu; `enabledByDefault` sets the starting state. */
+  assistant?: { enabledByDefault?: boolean; actions?: AssistantAction[] };
 }
 
 const COLLAPSED_KEY = 'nexus_sidebar_collapsed';
@@ -41,7 +45,7 @@ function isTypingTarget(target: EventTarget | null) {
  * Persistent application frame: sidebar (desktop), top bar, breadcrumb row, content canvas,
  * bottom navigation + drawer (mobile). Mount it once in a layout so it never remounts on navigation.
  */
-export function AppShell({ children, navigation, resolveBreadcrumbs, appName, appVersion, user, onSignOut, notifications, statusChip, paletteActions, externalLinks }: AppShellProps) {
+function AppShellInner({ children, navigation, resolveBreadcrumbs, appName, appVersion, user, onSignOut, notifications, statusChip, paletteActions, externalLinks, assistant }: AppShellProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [pinned, setPinned] = useState(true);
@@ -103,8 +107,20 @@ export function AppShell({ children, navigation, resolveBreadcrumbs, appName, ap
     ],
     [paletteActions, externalLinks],
   );
+  const assistantControl = useAssistant();
+  const { toggleMode, resolvedMode } = useTheme();
   const openPalette = useCallback(() => setPaletteOpen(true), []);
   const openMenu = useCallback(() => setMenuOpen(true), []);
+  const assistantActions = useMemo<AssistantAction[]>(
+    () => [
+      { id: 'search', label: 'Search', icon: 'Search', onSelect: openPalette },
+      { id: 'home', label: 'Dashboard', icon: 'LayoutDashboard', href: '/' },
+      { id: 'theme', label: resolvedMode === 'dark' ? 'Light mode' : 'Dark mode', icon: resolvedMode === 'dark' ? 'Sun' : 'Moon', onSelect: toggleMode },
+      ...(assistant?.actions ?? []),
+      ...(externalLinks ?? []).map((l) => ({ id: `ext-${l.href}`, label: l.label, icon: 'ExternalLink', href: l.href, external: true })),
+    ],
+    [openPalette, resolvedMode, toggleMode, assistant?.actions, externalLinks],
+  );
   const shell = useMemo(() => ({ setBreadcrumbs: setOverride, openCommandPalette: openPalette, openMobileMenu: openMenu }), [openPalette, openMenu]);
 
   return (
@@ -131,9 +147,21 @@ export function AppShell({ children, navigation, resolveBreadcrumbs, appName, ap
 
         <MobileBottomNav items={mobileItems} onOpenMenu={openMenu} menuOpen={menuOpen} />
         <MobileNavSheet open={menuOpen} onOpenChange={setMenuOpen} groups={navigation} appName={appName} user={user} onSignOut={onSignOut} />
+        {assistant && assistantControl?.enabled && (
+          <FloatingAssistant actions={assistantActions} />
+        )}
         <PwaInstallBanner canInstall={canInstall} onInstall={install} />
         <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} groups={navigation} actions={allActions} onSignOut={onSignOut} />
       </div>
     </ShellProvider>
+  );
+}
+
+/** Persistent application frame; see {@link AppShellProps}. */
+export function AppShell(props: AppShellProps) {
+  return (
+    <AssistantProvider enabledByDefault={props.assistant?.enabledByDefault ?? true}>
+      <AppShellInner {...props} />
+    </AssistantProvider>
   );
 }

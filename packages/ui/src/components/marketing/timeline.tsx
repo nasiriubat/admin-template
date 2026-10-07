@@ -1,4 +1,5 @@
 import { Badge, type BadgeProps } from '../ui/badge';
+import { Reveal } from './motion/reveal';
 
 export interface TimelineItem {
   date: string;
@@ -13,9 +14,11 @@ export function Timeline({ items, label }: { items: TimelineItem[]; label: strin
       {items.map((item) => (
         <li key={item.title} className="relative pl-8">
           <span aria-hidden="true" className="absolute -left-[7px] top-1.5 size-3.5 rounded-full border-2 border-primary bg-canvas" />
-          <p className="text-sm font-medium text-primary">{item.date}</p>
-          <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
-          <p className="mt-2 text-text-muted">{item.description}</p>
+          <Reveal direction="right" distance={20}>
+            <p className="text-sm font-medium text-primary">{item.date}</p>
+            <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
+            <p className="mt-2 text-text-muted">{item.description}</p>
+          </Reveal>
         </li>
       ))}
     </ol>
@@ -44,6 +47,7 @@ export function ReleaseTimeline({ releases }: { releases: Release[] }) {
       {releases.map((r) => (
         <li key={r.version} id={`v${r.version}`} className="relative scroll-mt-24 pl-8">
           <span aria-hidden="true" className="absolute -left-[7px] top-2 size-3.5 rounded-full border-2 border-primary bg-canvas" />
+          <Reveal>
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
             <h2 className="text-2xl font-semibold tracking-tight">v{r.version}</h2>
             <time dateTime={r.date} className="text-sm text-text-muted">
@@ -61,6 +65,7 @@ export function ReleaseTimeline({ releases }: { releases: Release[] }) {
               </li>
             ))}
           </ul>
+          </Reveal>
         </li>
       ))}
     </ol>

@@ -1,4 +1,4 @@
-import type { MatrixGroup, PlanDef } from '@nexus/ui';
+import type { MatrixGroup, PlanDef } from '@nexus/ui/marketing';
 
 export const plans: PlanDef[] = [
   { id: 'starter', name: 'Starter', description: 'For side projects and prototypes.', monthly: 0, yearly: 0, highlights: ['Admin shell and theme engine', '5 core modules', 'Community support'], cta: { label: 'Get started', href: '/contact' } },

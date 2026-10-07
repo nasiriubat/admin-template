@@ -6,6 +6,9 @@ All notable changes to this product should be documented here.
 
 ### Added
 
+- Five animated landing templates with a live switcher; motion primitives library (reveal, float, parallax, marquee, carousel, waves, blobs, tilt cards, pipeline diagrams, device frames)
+- Agent Workflows module: drag-and-drop builder (React Flow), cron schedules, test runs, run history, import/export
+- Floating quick-actions assistant (draggable, keyboard/pointer accessible, per-user and per-deployment toggle)
 - Module system with permission-aware navigation, route guards and breadcrumbs
 - Auth package (cookie-session adapter, demo adapter), typed API client with mock router
 - Shared UI: buttons, forms, dialogs, sheets, command palette, data table, filters, charts, state patterns

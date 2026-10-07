@@ -1,4 +1,4 @@
-import type { Release } from '@nexus/ui';
+import type { Release } from '@nexus/ui/marketing';
 
 export const releases: Release[] = [
   { version: '1.4.0', date: '2026-09-22', summary: 'Marketing website templates and a full documentation site.', changes: [

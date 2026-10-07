@@ -1,4 +1,4 @@
-import { ContactForm, PageHero } from '@nexus/ui';
+import { ContactForm, PageHero, Reveal } from '@nexus/ui/marketing';
 import { Page } from '../../components/page';
 import { contactEmail, pageMetadata } from '../../lib/seo';
 
@@ -15,9 +15,12 @@ export default function ContactPage() {
   return (
     <Page cta={false}>
       <PageHero eyebrow="Contact" title="How can we help?" description="Send us a message and the right person will get back to you." />
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[1fr_20rem]">
-        <ContactForm endpoint={endpoint} fallbackEmail={contactEmail} />
-        <aside aria-label="Contact details" className="space-y-6">
+      <div className="mx-auto grid grid-cols-1 max-w-6xl gap-10 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[1fr_20rem]">
+        <Reveal>
+          <ContactForm endpoint={endpoint} fallbackEmail={contactEmail} />
+        </Reveal>
+        <Reveal as="div" direction="left" delay={0.1}>
+        <aside aria-label="Contact details" className="space-y-6 rounded-card border border-border bg-surface p-6 shadow-card">
           <p>
             <span className="block text-sm font-semibold">Email</span>
             <a href={`mailto:${contactEmail}`} className="text-primary underline underline-offset-2">
@@ -31,6 +34,7 @@ export default function ContactPage() {
             </p>
           ))}
         </aside>
+        </Reveal>
       </div>
     </Page>
   );

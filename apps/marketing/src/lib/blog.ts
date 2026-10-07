@@ -1,4 +1,4 @@
-import type { ContentBlock } from '@nexus/ui';
+import type { ContentBlock } from '@nexus/ui/marketing';
 
 export const WORDS_PER_MINUTE = 220;
 

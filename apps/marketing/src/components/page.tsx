@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { CtaBand } from '@nexus/ui';
+import { CtaBand } from '@nexus/ui/marketing';
 import { SiteChrome } from '../components/site-chrome';
 
 /** Standard page frame: shared header/footer plus an optional closing CTA band. */

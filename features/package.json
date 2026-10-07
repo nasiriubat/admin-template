@@ -12,23 +12,24 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@nexus/api-client": "workspace:*",
     "@nexus/auth": "workspace:*",
     "@nexus/config": "workspace:*",
-    "@nexus/ui": "workspace:*",
     "@nexus/theme": "workspace:*",
+    "@nexus/ui": "workspace:*",
     "@tanstack/react-query": "^5.104.1",
     "@tanstack/react-table": "^8.21.3",
+    "@xyflow/react": "^12.12.0",
+    "lucide-react": "^1.52.0",
     "react-hook-form": "^7.89.0",
-    "@hookform/resolvers": "^5.9.1",
-    "zod": "^4.6.5",
-    "lucide-react": "^1.52.0"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
     "@types/react": "^19.0.8",
+    "next": "^15.1.7",
     "react": "^19.0.0",
-    "next": "^15.1.7"
+    "typescript": "^5.7.3"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0"

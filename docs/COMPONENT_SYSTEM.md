@@ -184,3 +184,12 @@ Each shared component should include:
 - documentation
 - examples
 - automated tests where appropriate
+
+## Floating assistant
+
+A draggable quick-actions button (like iOS AssistiveTouch) for the admin shell. It opens a grid of actions (search, dashboard, theme, module shortcuts, external links, scroll to top, keyboard shortcuts) and snaps to the left or right edge.
+
+- **On/off:** `appConfig.assistant.enabled` (apps/admin/src/lib/app-config.ts) sets the deployment default. Each user can override it from the account menu ("Floating assistant") or Theme & Styling; the choice is stored in `localStorage` (`nexus_assistant`) together with its position.
+- **Add actions:** pass `assistant={{ actions: [...] }}` to `AppShell` (see `apps/admin/src/components/admin-shell.tsx`).
+- **Accessibility:** it is a real button with a popover menu (Escape closes, focus returns). Dragging is never required: the menu has "Move assistant" corner buttons. It sits above the mobile bottom navigation and respects reduced motion.
+- **Hide:** set `assistant: { enabled: false }` in the app config to ship with it off.

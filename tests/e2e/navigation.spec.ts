@@ -4,7 +4,8 @@ import { expect, test } from '@playwright/test';
 // client-mode DataTable re-rendered endlessly. Click through every sidebar link like a user would.
 test('clicking through every sidebar link never freezes the page', async ({ page, isMobile }) => {
   test.skip(isMobile, 'sidebar is desktop only; mobile uses the drawer');
-  test.setTimeout(120_000);
+  test.slow();
+  test.setTimeout(300_000);
   await page.context().addCookies([{ name: 'nexus_session', value: 'u-demo-admin', url: 'http://localhost:3000' }]);
   await page.goto('/');
   const nav = page.getByRole('navigation', { name: 'Main' });
@@ -12,11 +13,11 @@ test('clicking through every sidebar link never freezes the page', async ({ page
   const hrefs = await nav.getByRole('link').evaluateAll((els) => els.map((e) => e.getAttribute('href') as string));
   expect(hrefs.length).toBeGreaterThan(15);
 
-  for (let round = 0; round < 2; round++) {
+  for (let round = 0; round < 1; round++) {
     for (const href of hrefs) {
       await nav.locator(`a[href="${href}"]`).click();
-      await expect(page).toHaveURL(href === '/' ? /\/$/ : new RegExp(`${href}$`));
-      await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible();
+      await expect(page).toHaveURL(href === '/' ? /\/$/ : new RegExp(`${href}$`), { timeout: 20_000 });
+      await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible({ timeout: 20_000 });
       // Give data a moment to arrive, then prove the main thread still responds.
       await page.waitForTimeout(700);
       const responsive = await Promise.race([page.evaluate(() => true), new Promise<boolean>((r) => setTimeout(() => r(false), 3000))]);

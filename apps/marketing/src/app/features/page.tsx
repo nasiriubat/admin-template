@@ -1,4 +1,4 @@
-import { FeatureRows, IntegrationsGrid, PageHero, TrustBand, Button } from '@nexus/ui';
+import { FeatureRows, IntegrationsGrid, PageHero, TrustBand, Button, CurvedSection, Marquee, IconRenderer } from '@nexus/ui/marketing';
 import Link from 'next/link';
 import { Page } from '../../components/page';
 import { ShellVisual, TableVisual, ThemeVisual } from '../../components/feature-visuals';
@@ -21,7 +21,17 @@ export default function FeaturesPage() {
         </Button>
       </PageHero>
       <FeatureRows items={featureGroups.map((g) => ({ ...g, bullets: [...g.bullets], visual: visuals[g.id] }))} />
-      <IntegrationsGrid id="integrations" eyebrow="Integrations" title="Connect the systems you already use" description="A typed API client and documented contracts work with any backend." items={integrations} />
+      <CurvedSection tone="surface" curve="both">
+        <IntegrationsGrid id="integrations" eyebrow="Integrations" title="Connect the systems you already use" description="A typed API client and documented contracts work with any backend." items={integrations} />
+        <Marquee label="Supported integrations" speed={40} gap={16}>
+          {integrations.map((i) => (
+            <span key={i.name} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-canvas px-4 py-2 text-sm font-medium">
+              <IconRenderer name={i.icon} className="size-4 text-primary" />
+              {i.name}
+            </span>
+          ))}
+        </Marquee>
+      </CurvedSection>
       <TrustBand id="security" title="Security and compliance" description="Security is part of the framework, not an add-on." items={securityItems} />
     </Page>
   );

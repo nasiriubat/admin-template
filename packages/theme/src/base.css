@@ -49,6 +49,8 @@ html {
 }
 
 body {
+  /* Decorative, animated elements may extend past the viewport edge; never let them add a horizontal scrollbar. `clip` (unlike `hidden`) keeps position: sticky working. */
+  overflow-x: clip;
   background-color: rgb(var(--canvas-rgb));
   color: rgb(var(--text-rgb));
   font-family: var(--font-family-sans);

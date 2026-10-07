@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Avatar } from '../ui/avatar';
 import { Badge } from '../ui/badge';
 import { SectionShell } from './marketing-nav';
+import { Reveal } from './motion/reveal';
 
 export interface TeamMember {
   name: string;
@@ -14,13 +15,13 @@ export function TeamGrid({ id, eyebrow, title, description, members }: { id?: st
   return (
     <SectionShell id={id} eyebrow={eyebrow} title={title} description={description}>
       <ul className="grid grid-cols-1 gap-4 min-[520px]:grid-cols-2 lg:grid-cols-4">
-        {members.map((m) => (
-          <li key={m.name} className="rounded-card border border-border bg-surface p-5 shadow-card">
+        {members.map((m, i) => (
+          <Reveal as="li" key={m.name} delay={(i % 4) * 0.08} variant="scale" className="rounded-card border border-border bg-surface p-5 shadow-card transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
             <Avatar name={m.name} size="lg" />
             <h3 className="mt-4 font-semibold">{m.name}</h3>
             <p className="text-sm text-primary">{m.role}</p>
             <p className="mt-2 text-sm text-text-muted">{m.bio}</p>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </SectionShell>
@@ -41,9 +42,9 @@ export function CaseStudyCards({ id, eyebrow, title, description, items }: { id?
   return (
     <SectionShell id={id} eyebrow={eyebrow} title={title} description={description}>
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        {items.map((c) => (
-          <li key={c.company}>
-            <article className="flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card">
+        {items.map((c, i) => (
+          <Reveal as="li" key={c.company} delay={i * 0.1}>
+            <article className="flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
               <Badge variant="neutral" className="self-start">
                 {c.industry}
               </Badge>
@@ -64,7 +65,7 @@ export function CaseStudyCards({ id, eyebrow, title, description, items }: { id?
                 </Link>
               )}
             </article>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </SectionShell>

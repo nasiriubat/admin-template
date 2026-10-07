@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ContentBlocks, DocsLayout, extractHeadings } from '@nexus/ui';
+import { ContentBlocks, DocsLayout, ScrollProgress, extractHeadings } from '@nexus/ui/marketing';
 import { SiteChrome } from '../../../components/site-chrome';
 import { docPages, docsNav } from '../../../content/docs';
 import { pageMetadata } from '../../../lib/seo';
@@ -26,6 +26,7 @@ export default async function DocPageRoute({ params }: { params: Promise<Params>
   const link = (d?: (typeof docPages)[number]) => (d ? { title: d.title, href: `/docs/${d.slug}` } : undefined);
   return (
     <SiteChrome>
+      <ScrollProgress />
       <DocsLayout groups={docsNav} current={`/docs/${doc.slug}`} toc={extractHeadings(doc.blocks)} prev={link(docPages[index - 1])} next={link(docPages[index + 1])}>
         <article>
           <p className="text-sm font-semibold text-primary">{doc.group}</p>

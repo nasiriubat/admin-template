@@ -3,9 +3,12 @@
 import { useTheme, type ColorMode } from '@nexus/theme';
 import { Label } from '../ui/label';
 import { SegmentedControl } from '../ui/segmented-control';
+import { Switch } from '../ui/switch';
+import { useAssistant } from './floating-assistant';
 
 /** Preset, mode, density and motion controls. Shared by the top-bar popover, mobile sheet and Theme editor. */
 export function ThemeControls({ className }: { className?: string }) {
+  const assistant = useAssistant();
   const { preset, availablePresets, setPreset, mode, setMode, density, setDensity, motion, setMotion, radius, setRadius } = useTheme();
   return (
     <div className={className}>
@@ -47,6 +50,15 @@ export function ThemeControls({ className }: { className?: string }) {
           <Label>Corner shape</Label>
           <SegmentedControl label="Corner shape" value={radius} onChange={setRadius} options={[{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' }, { value: 'pill', label: 'Pill' }]} />
         </div>
+        {assistant && (
+          <div className="flex items-center justify-between gap-3 rounded-input border border-border bg-canvas px-3 py-2.5">
+            <div>
+              <Label htmlFor="assistant-toggle">Floating assistant</Label>
+              <p className="text-xs text-text-muted">Draggable quick-actions button.</p>
+            </div>
+            <Switch id="assistant-toggle" checked={assistant.enabled} onCheckedChange={assistant.setEnabled} />
+          </div>
+        )}
       </div>
     </div>
   );

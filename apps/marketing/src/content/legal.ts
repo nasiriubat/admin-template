@@ -1,4 +1,4 @@
-import type { ContentBlock } from '@nexus/ui';
+import type { ContentBlock } from '@nexus/ui/marketing';
 
 export interface LegalDoc {
   title: string;

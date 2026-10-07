@@ -83,3 +83,19 @@ Pages (all static, with canonical + Open Graph metadata and sitemap entries):
 Copy lives in `apps/marketing/src/content/`, navigation in `src/lib/nav.ts`, and every section in `@nexus/ui` (`packages/ui/src/components/marketing`).
 Branding assets are generated from `branding/logo.svg` with `pnpm icons`. Set `NEXT_PUBLIC_SCROLL_ANIMATION=off` to disable GSAP
 (see `docs/COMMERCIALIZATION.md` for its license).
+
+## Template varieties and motion
+
+Five complete landing templates share one design system and can be switched live with the floating **Templates** button (or browsed at `/templates`; hide the button in production with `NEXT_PUBLIC_TEMPLATE_SWITCHER=off`).
+
+| Template | Route | Personality | Signature elements |
+| --- | --- | --- | --- |
+| Aurora | `/` | Soft SaaS | Gradient mesh, floating UI cards, wave dividers, bento with spotlight/tilt, testimonial carousel |
+| Neon | `/ai` | Dark AI/dev tools | Grid + orbs, live agent chat demo, animated pipeline diagram, code card, glow borders |
+| Editorial | `/enterprise` | Calm enterprise | Curved sections, parallax lineage illustration, case-study carousel, section nav |
+| Playful | `/playful` | Warm consumer | Morphing blobs, stickers, floating shapes, tilt cards, phone mock, pause-animations toggle |
+| Product | `/product` | Keynote-style launch | Scroll-driven device mockup, zoom story, phone carousel, sticky showcase |
+
+All motion comes from the primitives in `packages/ui/src/components/marketing/motion` (see `docs/MOTION.md`): reveal, float, parallax, marquee, carousel, count-up, rotating words, waves/curves, blobs, floating shapes, tilt/spotlight cards, pipeline diagrams and device frames. Rules: content never depends on animation to appear, `prefers-reduced-motion` renders everything static, moving content has a pause control, decorative SVG is `aria-hidden`.
+
+Marketing pages import from `@nexus/ui/marketing` (a lean entry without admin-only code) to keep pages small. To add a template: create `apps/marketing/src/templates/<name>/`, a route, and one entry in `src/lib/templates.ts`.

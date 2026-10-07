@@ -11,7 +11,7 @@ const nextConfig = {
   output: 'standalone',
   outputFileTracingRoot: repoRoot,
   transpilePackages: ['@nexus/ui', '@nexus/theme', '@nexus/motion', '@nexus/config'],
-  experimental: { optimizePackageImports: ['lucide-react', '@nexus/ui'] },
+  experimental: { optimizePackageImports: ['lucide-react'] },
   async headers() {
     return [
       {

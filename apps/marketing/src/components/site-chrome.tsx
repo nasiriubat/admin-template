@@ -1,8 +1,9 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { IconButton, IconRenderer, MarketingFooter, MarketingNav, type MarketingLink } from '@nexus/ui';
+import { IconButton, IconRenderer, MarketingFooter, MarketingNav, type MarketingLink } from '@nexus/ui/marketing';
 import { useTheme } from '@nexus/theme';
+import { TemplateSwitcher } from './template-switcher';
 import { footerColumns, primaryCta, primaryLinks, secondaryCta as defaultSecondary, siteBrand, siteTagline } from '../lib/nav';
 
 function ThemeToggle() {
@@ -25,6 +26,7 @@ export function SiteChrome({ children, brand = siteBrand, tagline = siteTagline,
       <main id="content">{children}</main>
       <MarketingFooter brand={brand} tagline={tagline} columns={footerColumns} />
       <ThemeToggle />
+      <TemplateSwitcher />
     </>
   );
 }

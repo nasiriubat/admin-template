@@ -12,6 +12,7 @@ export * from './components/shell/command-palette';
 export * from './components/shell/notification-bell';
 export * from './components/shell/theme-controls';
 export * from './components/shell/brand-mark';
+export * from './components/shell/floating-assistant';
 
 // Primitives
 export * from './components/ui/button';

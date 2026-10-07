@@ -1,4 +1,4 @@
-import { PageHero, ReleaseTimeline } from '@nexus/ui';
+import { PageHero, ReleaseTimeline } from '@nexus/ui/marketing';
 import { Page } from '../../components/page';
 import { releases } from '../../content/changelog';
 import { pageMetadata } from '../../lib/seo';

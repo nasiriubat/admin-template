@@ -21,9 +21,14 @@ export interface AppConfig {
     analytics: boolean;
     ai: boolean;
     knowledge: boolean;
+    workflows: boolean;
     billing: boolean;
     settings: boolean;
     examples: boolean;
+  };
+  /** Floating quick-actions assistant (draggable button). Users can still turn it off themselves. */
+  assistant: {
+    enabled: boolean;
   };
   theme: {
     preset: string;
@@ -60,11 +65,15 @@ export const defaultAppConfig: AppConfig = {
     analytics: true,
     ai: true,
     knowledge: true,
+    workflows: true,
     // Optional: turn off for products that do not bill customers.
     billing: true,
     settings: true,
     // Removable demo pages: set false or delete features/examples before shipping
     examples: true,
+  },
+  assistant: {
+    enabled: true,
   },
   theme: {
     preset: 'modern-saas',
@@ -86,6 +95,7 @@ export function defineAppConfig(overrides: DeepPartial<AppConfig> = {}): AppConf
     ...overrides,
     navigation: { ...defaultAppConfig.navigation, ...overrides.navigation },
     modules: { ...defaultAppConfig.modules, ...overrides.modules },
+    assistant: { ...defaultAppConfig.assistant, ...overrides.assistant },
     theme: { ...defaultAppConfig.theme, ...overrides.theme },
     pwa: { ...defaultAppConfig.pwa, ...overrides.pwa },
   } as AppConfig;

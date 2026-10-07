@@ -1,4 +1,4 @@
-import type { CaseStudy } from '@nexus/ui';
+import type { CaseStudy } from '@nexus/ui/marketing';
 
 export const caseStudies: CaseStudy[] = [
   { company: 'Parcel Freight', industry: 'Logistics', headline: 'Three internal dashboards became one admin', summary: 'Parcel Freight replaced separate dispatch, billing and support tools with one Nexus-based application that dispatchers use on tablets in the warehouse.', metrics: [{ value: '3 → 1', label: 'tools consolidated' }, { value: '40%', label: 'faster onboarding' }] },

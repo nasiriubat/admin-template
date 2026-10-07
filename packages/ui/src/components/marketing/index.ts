@@ -13,3 +13,4 @@ export * from './prose';
 export * from './docs-layout';
 export * from './contact-schema';
 export * from './contact-form';
+export * from './motion';

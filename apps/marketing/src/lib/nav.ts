@@ -1,5 +1,5 @@
 import { getRuntimeConfig } from '@nexus/config';
-import type { MarketingLink } from '@nexus/ui';
+import type { MarketingLink } from '@nexus/ui/marketing';
 
 const { adminUrl } = getRuntimeConfig();
 
@@ -20,11 +20,11 @@ export const primaryCta: MarketingLink = { label: 'Start free', href: '/pricing'
 export const secondaryCta: MarketingLink = adminUrl ? { label: 'Admin demo', href: adminUrl } : { label: 'Contact', href: '/contact' };
 
 export const footerColumns: Array<{ title: string; links: MarketingLink[] }> = [
-  { title: 'Templates', links: [{ label: 'SaaS', href: '/' }, { label: 'AI product', href: '/ai' }, { label: 'Enterprise', href: '/enterprise' }] },
+  { title: 'Templates', links: [{ label: 'SaaS', href: '/' }, { label: 'AI product', href: '/ai' }, { label: 'Enterprise', href: '/enterprise' }, { label: 'Playful', href: '/playful' }, { label: 'Product', href: '/product' }, { label: 'All templates', href: '/templates' }] },
   { title: 'Product', links: [{ label: 'Features', href: '/features' }, { label: 'Pricing', href: '/pricing' }, { label: 'Documentation', href: '/docs' }, { label: 'Changelog', href: '/changelog' }] },
   { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Customers', href: '/customers' }, { label: 'Blog', href: '/blog' }, { label: 'Contact', href: '/contact' }] },
   { title: 'Legal', links: [{ label: 'Privacy', href: '/privacy' }, { label: 'Terms', href: '/terms' }] },
 ];
 
 /** Every static route, used by the sitemap. */
-export const staticRoutes = ['', '/ai', '/enterprise', '/pricing', '/features', '/about', '/contact', '/changelog', '/blog', '/docs', '/customers', '/privacy', '/terms'];
+export const staticRoutes = ['', '/ai', '/enterprise', '/playful', '/product', '/templates', '/pricing', '/features', '/about', '/contact', '/changelog', '/blog', '/docs', '/customers', '/privacy', '/terms'];

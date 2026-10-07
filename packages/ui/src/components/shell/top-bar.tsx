@@ -7,8 +7,9 @@ import { useTheme } from '@nexus/theme';
 import { cn } from '../../lib/utils';
 import { IconRenderer } from '../icons/icon-renderer';
 import { Avatar } from '../ui/avatar';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { BrandMark } from './brand-mark';
+import { useAssistant } from './floating-assistant';
 import { ThemeControls } from './theme-controls';
 
 export interface ShellUser {
@@ -41,6 +42,7 @@ const iconButton =
 
 export function TopBar({ appName, user, onOpenSearch, onSignOut, notifications, statusChip, onInstallApp, profileHref = '/profile', settingsHref = '/settings', externalLinks, className }: TopBarProps) {
   const { resolvedMode, toggleMode } = useTheme();
+  const assistant = useAssistant();
 
   return (
     <header
@@ -140,6 +142,11 @@ export function TopBar({ appName, user, onOpenSearch, onSignOut, notifications, 
                 <IconRenderer name="Settings" className="size-4" /> Settings
               </Link>
             </DropdownMenuItem>
+            {assistant && (
+              <DropdownMenuCheckboxItem checked={assistant.enabled} onCheckedChange={(v) => assistant.setEnabled(Boolean(v))} onSelect={(e) => e.preventDefault()}>
+                Floating assistant
+              </DropdownMenuCheckboxItem>
+            )}
             {externalLinks?.map((link) => (
               <DropdownMenuItem key={link.href} asChild>
                 <a href={link.href} target="_blank" rel="noopener noreferrer">

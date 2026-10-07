@@ -1,4 +1,4 @@
-import { cn } from '@nexus/ui';
+import { cn } from '@nexus/ui/marketing';
 import { ProductPreview } from './product-preview';
 
 const frame = 'overflow-hidden rounded-card border border-border bg-canvas p-4 shadow-popover';

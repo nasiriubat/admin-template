@@ -7,6 +7,7 @@ import { IconRenderer } from '../icons/icon-renderer';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Switch } from '../ui/switch';
+import { Reveal } from './motion/reveal';
 import { formatPrice, maxSavingsPercent, planPrice, yearlySavingsPercent, type BillingCycle, type MatrixGroup, type MatrixValue, type PlanDef } from './pricing-utils';
 
 export function MatrixCell({ value }: { value: MatrixValue }) {
@@ -117,11 +118,11 @@ export function PricingPlans({ plans, groups, yearlyNote = 'billed yearly' }: { 
       </div>
 
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {plans.map((plan) => {
+        {plans.map((plan, i) => {
           const price = planPrice(plan, cycle);
           const save = yearlySavingsPercent(plan);
           return (
-            <li key={plan.id} className={cn('relative flex flex-col rounded-card border bg-surface p-6 shadow-card', plan.featured ? 'border-primary ring-1 ring-primary' : 'border-border')}>
+            <Reveal as="li" key={plan.id} delay={i * 0.08} className={cn('relative flex flex-col rounded-card border bg-surface p-6 shadow-card transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0', plan.featured ? 'border-primary ring-1 ring-primary' : 'border-border')}>
               {plan.featured && <Badge variant="primary" className="absolute -top-3 left-6 bg-surface">Most popular</Badge>}
               <h3 className="font-semibold">{plan.name}</h3>
               <p className="mt-3 flex items-baseline gap-1" aria-live="polite">
@@ -141,7 +142,7 @@ export function PricingPlans({ plans, groups, yearlyNote = 'billed yearly' }: { 
               <Button variant={plan.featured ? 'primary' : 'secondary'} asChild>
                 <Link href={plan.cta.href}>{plan.cta.label}</Link>
               </Button>
-            </li>
+            </Reveal>
           );
         })}
       </ul>

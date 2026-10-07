@@ -1,4 +1,4 @@
-import type { ContentBlock, DocsNavGroup } from '@nexus/ui';
+import type { ContentBlock, DocsNavGroup } from '@nexus/ui/marketing';
 
 export interface DocPage {
   slug: string;

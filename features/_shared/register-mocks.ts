@@ -21,3 +21,4 @@ import '../knowledge/mock';
 import '../billing/mock';
 import '../ai/mock';
 import '../examples/mock';
+import '../workflows/mock';

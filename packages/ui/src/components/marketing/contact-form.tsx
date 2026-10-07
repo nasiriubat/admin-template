@@ -71,7 +71,7 @@ export function ContactForm({ endpoint, fallbackEmail }: { endpoint?: string; fa
   return (
     <form onSubmit={onSubmit} noValidate aria-label="Contact form" className="space-y-5 rounded-card border border-border bg-surface p-5 shadow-card md:p-8">
       {status.kind === 'error' && <Alert variant="danger" title="Message not sent">{status.message}</Alert>}
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <FormField label="Name" required error={errors.name?.message}>
           <Input autoComplete="name" {...register('name')} />
         </FormField>
@@ -79,7 +79,7 @@ export function ContactForm({ endpoint, fallbackEmail }: { endpoint?: string; fa
           <Input type="email" autoComplete="email" inputMode="email" {...register('email')} />
         </FormField>
       </div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <FormField label="Company" optional error={errors.company?.message}>
           <Input autoComplete="organization" {...register('company')} />
         </FormField>

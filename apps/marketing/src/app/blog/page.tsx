@@ -1,4 +1,4 @@
-import { Avatar, Badge, PageHero } from '@nexus/ui';
+import { Avatar, Badge, PageHero, Reveal } from '@nexus/ui/marketing';
 import Link from 'next/link';
 import { Page } from '../../components/page';
 import { posts } from '../../content/posts';
@@ -21,10 +21,10 @@ export default function BlogPage() {
           ))}
         </ul>
       </PageHero>
-      <ul className="mx-auto grid max-w-6xl gap-4 px-4 py-12 md:grid-cols-2 md:px-6 md:py-16 lg:grid-cols-3">
-        {sorted.map((p) => (
-          <li key={p.slug}>
-            <article className="relative flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card focus-within:ring-2 focus-within:ring-primary hover:border-primary">
+      <ul className="mx-auto grid grid-cols-1 max-w-6xl gap-4 px-4 py-12 md:grid-cols-2 md:px-6 md:py-16 lg:grid-cols-3">
+        {sorted.map((p, i) => (
+          <Reveal as="li" key={p.slug} delay={(i % 3) * 0.08}>
+            <article className="relative flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card focus-within:ring-2 focus-within:ring-primary transition-transform duration-300 hover:-translate-y-1 hover:border-primary motion-reduce:transition-none motion-reduce:hover:translate-y-0">
               <div className="flex flex-wrap gap-2">
                 {p.tags.map((t) => (
                   <Badge key={t} variant="primary">
@@ -48,7 +48,7 @@ export default function BlogPage() {
                 </span>
               </div>
             </article>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </Page>

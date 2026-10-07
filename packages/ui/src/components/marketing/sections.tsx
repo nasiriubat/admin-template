@@ -6,6 +6,11 @@ import { BrandMark } from '../shell/brand-mark';
 import { Button } from '../ui/button';
 import type { MarketingLink } from './marketing-nav';
 import { SectionShell } from './marketing-nav';
+import { CountUp } from './motion/count-up';
+import { Orbs } from './motion/backgrounds';
+import { Reveal } from './motion/reveal';
+import { Sparkles } from './motion/decorations';
+import { parseStat } from './stat-utils';
 
 export function LogoCloud({ title, logos }: { title: string; logos: string[] }) {
   return (
@@ -32,14 +37,14 @@ export function FeatureGrid({ id, eyebrow, title, description, features }: { id?
   return (
     <SectionShell id={id} eyebrow={eyebrow} title={title} description={description}>
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((f) => (
-          <li key={f.title} className="rounded-card border border-border bg-surface p-6 shadow-card">
+        {features.map((f, i) => (
+          <Reveal as="li" key={f.title} delay={(i % 3) * 0.08} className="rounded-card border border-border bg-surface p-6 shadow-card transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
             <span className="mb-4 grid size-11 place-items-center rounded-xl bg-primary/10 text-primary">
               <IconRenderer name={f.icon} className="size-5" />
             </span>
             <h3 className="font-semibold">{f.title}</h3>
             <p className="mt-2 text-sm text-text-muted">{f.description}</p>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </SectionShell>
@@ -79,16 +84,29 @@ export function BentoGrid({ id, eyebrow, title, description, items }: { id?: str
   );
 }
 
-export function StatsBand({ stats }: { stats: Array<{ value: string; label: string }> }) {
+export interface StatItem {
+  /** Display text ("99.9%") or a number to count up to (combine with prefix/suffix/decimals). */
+  value: string | number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+}
+
+/** Key figures. Numbers (or numeric strings such as "99.9%") count up when scrolled into view. */
+export function StatsBand({ stats }: { stats: StatItem[] }) {
   return (
     <section aria-label="Key figures" className="border-y border-border bg-surface">
       <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 md:grid-cols-4 md:px-6">
-        {stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <dt className="order-2 mt-1 text-sm text-text-muted">{s.label}</dt>
-            <dd className="text-3xl font-semibold tracking-tight text-text md:text-4xl">{s.value}</dd>
-          </div>
-        ))}
+        {stats.map((s, i) => {
+          const parsed = typeof s.value === 'number' ? { value: s.value, prefix: s.prefix ?? '', suffix: s.suffix ?? '', decimals: s.decimals ?? 0 } : parseStat(s.value);
+          return (
+            <Reveal key={s.label} delay={i * 0.08} className="text-center">
+              <dt className="order-2 mt-1 text-sm text-text-muted">{s.label}</dt>
+              <dd className="text-3xl font-semibold tracking-tight text-text md:text-4xl">{parsed ? <CountUp value={parsed.value} prefix={parsed.prefix} suffix={parsed.suffix} decimals={parsed.decimals} /> : s.value}</dd>
+            </Reveal>
+          );
+        })}
       </dl>
     </section>
   );
@@ -176,7 +194,9 @@ export function Faq({ id, title, items }: { id?: string; title: string; items: A
 export function CtaBand({ title, description, primary, secondary }: { title: string; description: string; primary: MarketingLink; secondary?: MarketingLink }) {
   return (
     <section aria-label="Get started" className="mx-auto max-w-6xl px-4 pb-16 md:px-6 md:pb-24">
-      <div className="rounded-3xl bg-primary px-6 py-14 text-center text-primary-foreground md:px-12">
+      <Reveal variant="scale" className="relative isolate overflow-hidden rounded-3xl bg-primary px-6 py-14 text-center text-primary-foreground md:px-12">
+        <Orbs tones={['accent', 'info']} intensity="vivid" className="-z-10" />
+        <Sparkles className="absolute inset-0 -z-10" count={8} />
         <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
         <p className="mx-auto mt-4 max-w-xl text-lg opacity-90">{description}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -189,7 +209,7 @@ export function CtaBand({ title, description, primary, secondary }: { title: str
             </Button>
           )}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -197,7 +217,7 @@ export function CtaBand({ title, description, primary, secondary }: { title: str
 export function MarketingFooter({ brand, tagline, columns }: { brand: string; tagline: string; columns: Array<{ title: string; links: MarketingLink[] }> }) {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-[1.5fr_repeat(3,1fr)] md:px-6">
+      <div className="mx-auto grid grid-cols-1 max-w-6xl gap-10 px-4 py-12 md:grid-cols-[1.5fr_repeat(3,1fr)] md:px-6">
         <div className="space-y-3">
           <p className="flex items-center gap-2.5 font-semibold">
             <BrandMark className="size-8 text-sm" /> {brand}
