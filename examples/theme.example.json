@@ -1,0 +1,11 @@
+{
+  "name": "Modern SaaS",
+  "mode": "system",
+  "primary": "#635BFF",
+  "secondary": "#0F172A",
+  "accent": "#14B8A6",
+  "radius": "medium",
+  "density": "comfortable",
+  "motion": "standard",
+  "fontFamily": "Geist"
+}

@@ -1,0 +1,5 @@
+# See /.env.example for the full, documented list.
+NEXT_PUBLIC_API_BASE_URL=https://api.example.com
+NEXT_PUBLIC_DEMO_MODE=false
+NEXT_PUBLIC_APP_NAME=Nexus Admin
+NEXT_PUBLIC_DEFAULT_THEME=modern-saas

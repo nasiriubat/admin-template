@@ -1,0 +1,91 @@
+export interface AppConfig {
+  name: string;
+  version: string;
+  deploymentMode: 'standalone' | 'internal' | 'client';
+  navigation: {
+    desktop: 'sidebar' | 'dual-sidebar';
+    mobile: 'bottom-nav' | 'drawer';
+  };
+  /** Optional modules. Core modules (dashboard, auth, settings, theme, notifications) are always on. */
+  modules: {
+    users: boolean;
+    roles: boolean;
+    audit: boolean;
+    files: boolean;
+    logs: boolean;
+    jobs: boolean;
+    health: boolean;
+    featureFlags: boolean;
+    apiKeys: boolean;
+    webhooks: boolean;
+    analytics: boolean;
+    ai: boolean;
+    knowledge: boolean;
+    billing: boolean;
+    settings: boolean;
+  };
+  theme: {
+    preset: string;
+    density: 'compact' | 'comfortable' | 'spacious';
+    motion: 'minimal' | 'standard' | 'expressive';
+    mode: 'light' | 'dark' | 'system';
+  };
+  pwa: {
+    enabled: boolean;
+    scope: string;
+    display: 'standalone' | 'minimal-ui' | 'fullscreen';
+  };
+}
+
+export const defaultAppConfig: AppConfig = {
+  name: 'Nexus Admin',
+  version: '1.0.0',
+  deploymentMode: 'standalone',
+  navigation: {
+    desktop: 'sidebar',
+    mobile: 'bottom-nav',
+  },
+  modules: {
+    users: true,
+    roles: true,
+    audit: true,
+    files: true,
+    logs: true,
+    jobs: true,
+    health: true,
+    featureFlags: true,
+    apiKeys: true,
+    webhooks: true,
+    analytics: true,
+    ai: true,
+    knowledge: true,
+    // Optional: enable for products that bill customers.
+    billing: false,
+    settings: true,
+  },
+  theme: {
+    preset: 'modern-saas',
+    density: 'comfortable',
+    motion: 'standard',
+    mode: 'system',
+  },
+  pwa: {
+    enabled: true,
+    scope: '/',
+    display: 'standalone',
+  },
+};
+
+/** Shallow-deep merge so projects only specify what they change. */
+export function defineAppConfig(overrides: DeepPartial<AppConfig> = {}): AppConfig {
+  return {
+    ...defaultAppConfig,
+    ...overrides,
+    navigation: { ...defaultAppConfig.navigation, ...overrides.navigation },
+    modules: { ...defaultAppConfig.modules, ...overrides.modules },
+    theme: { ...defaultAppConfig.theme, ...overrides.theme },
+    pwa: { ...defaultAppConfig.pwa, ...overrides.pwa },
+  } as AppConfig;
+}
+
+type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K] };

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nexus/theme": ["packages/theme/src"],
+      "@nexus/theme/*": ["packages/theme/src/*"],
+      "@nexus/ui": ["packages/ui/src"],
+      "@nexus/ui/*": ["packages/ui/src/*"],
+      "@nexus/config": ["packages/config/src"],
+      "@nexus/config/*": ["packages/config/src/*"],
+      "@nexus/motion": ["packages/motion/src"],
+      "@nexus/motion/*": ["packages/motion/src/*"],
+      "@nexus/auth": ["packages/auth/src"],
+      "@nexus/auth/*": ["packages/auth/src/*"],
+      "@nexus/api-client": ["packages/api-client/src"],
+      "@nexus/api-client/*": ["packages/api-client/src/*"],
+      "@nexus/features": ["features"],
+      "@nexus/features/*": ["features/*"],
+      "@nexus/admin/*": ["apps/admin/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".next"]
+}

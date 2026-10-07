@@ -63,6 +63,8 @@ Sign in at `/login` with the demo accounts (demo mode only):
 | `editor@example.com` | read access plus files |
 | `viewer@example.com` | dashboard, analytics, health |
 
+Billing is an optional module (off by default): set `modules.billing: true` in `apps/admin/src/lib/app-config.ts`.
+
 Any password of 8+ characters works in demo mode. **Demo mode uses an in-memory API and a non-secret marker cookie. It is not a security control. Set `NEXT_PUBLIC_API_BASE_URL` (or `NEXT_PUBLIC_DEMO_MODE=false`) for real deployments.**
 
 ## Scripts

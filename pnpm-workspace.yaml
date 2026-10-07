@@ -1,0 +1,10 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+  - 'features'
+
+# Dependency build scripts are denied by default (supply-chain safety).
+# unrs-resolver only ships an optional native accelerator for eslint; the
+# WASM fallback is used when its build script is skipped.
+allowBuilds:
+  unrs-resolver: false

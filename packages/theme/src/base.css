@@ -1,0 +1,107 @@
+/*
+ * Base layer shared by every Nexus app. Colour/radius/density tokens are injected by the theme
+ * engine (see generateThemeCss); the :root block below is only the pre-JS fallback and matches
+ * the default "modern-saas" preset in light mode.
+ */
+:root {
+  --canvas-rgb: 248 250 252;
+  --surface-rgb: 255 255 255;
+  --surface-elevated-rgb: 255 255 255;
+  --border-rgb: 226 232 240;
+  --text-rgb: 15 23 42;
+  --text-muted-rgb: 86 100 120;
+  --primary-rgb: 86 79 222;
+  --primary-foreground: #ffffff;
+  --secondary-rgb: 15 23 42;
+  --secondary-foreground: #ffffff;
+  --accent-rgb: 9 107 151;
+  --accent-foreground: #ffffff;
+  --success-rgb: 10 115 81;
+  --success-foreground: #ffffff;
+  --warning-rgb: 140 91 6;
+  --warning-foreground: #ffffff;
+  --danger-rgb: 181 52 52;
+  --danger-foreground: #ffffff;
+  --info-rgb: 44 97 184;
+  --info-foreground: #ffffff;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  --radius-card: 0.75rem;
+  --radius-button: 0.5rem;
+  --radius-input: 0.5rem;
+
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --motion-duration-multiplier: 1;
+  --row-height: 3rem;
+  --nav-padding: 0.5rem 0.75rem;
+  --topbar-height: 4rem;
+  --card-padding: 1.5rem;
+  --input-height: 2.5rem;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: rgb(var(--canvas-rgb));
+  color: rgb(var(--text-rgb));
+  font-family: var(--font-family-sans);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7 / 2.4.11). */
+:focus-visible {
+  outline: 2px solid rgb(var(--primary-rgb));
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+::selection {
+  background: rgb(var(--primary-rgb) / 0.2);
+}
+
+/* Respect the user's motion preference (WCAG 2.3.3). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-rgb));
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--text-muted-rgb) / 0.5);
+}
+
+/* Safe-area helpers for notched devices. */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
